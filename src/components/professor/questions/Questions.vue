@@ -26,7 +26,7 @@
     v-if="!hasQuestions">
       <div class="hero-body">
         <h1 class="title">No questions in the database</h1>
-        <h2 class="subtitle">Try adding some by clicking switching to the OPTIONS tab</h2>
+        <h2 class="subtitle">Try adding some by switching to the OPTIONS tab</h2>
       </div>
   </section>
 

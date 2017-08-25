@@ -32,6 +32,7 @@ export default {
 
   data () {
     return {
+      // NOTE Set this to empty string and replace them with placeholders.
       database: {
         name: 'Database',
         description: 'Description',
@@ -44,7 +45,7 @@ export default {
 
   methods: {
     createDatabase () {
-
+      // NOTE Check whether database with same name already exists.
       axios.post('http://localhost:3000/databases',{
         name: this.database.name,
         description: this.database.description,
@@ -53,13 +54,14 @@ export default {
       .then(({ data: database }) => {
         this.$store.commit('addDatabase', database)
 
-        console.log('retrieved from server', database)
-        toastr.success('Creating database', 'Successful')
-
         // Clear input data
         this.database.name = 'Database'
         this.database.description = 'Description'
         this.database.url_diagram = 'URL Diagram'
+
+        this.$router.push({ name: 'Database', params: { id: database.id }})
+        toastr.success('Creating database', 'Successful')
+
       })
       .catch(error => {
         toastr.error(error, 'Something went wrong')
@@ -73,7 +75,8 @@ export default {
 
   mounted() {
     const title = 'Create new database'
-    const subtitle = 'This is subtext explaining the new database creation'
+    const subtitle = `For now, just give your database name and description.
+                      You'll be able to add questions to it once it is created.`
     eventBus.$emit('databases:changeInfo', title, subtitle)
   }
 }
