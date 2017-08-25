@@ -40,6 +40,11 @@ import { mapGetters } from 'vuex'
 
 export default {
   components: {
+    /*
+    NOTE You have the same tabs display component all around.
+    Pull this component out.
+    Maybe use $parent to return display type out.
+     */
     'tabs': Tabs,
     'search-bar': SearchBar,
     'icons-display': IconsDisplay,

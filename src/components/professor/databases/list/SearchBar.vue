@@ -1,14 +1,10 @@
 <template lang="html">
-  <div class="control has-icons-left">
+  <div class="control">
     <input class="input is-medium"
            type="text"
            placeholder="Search"
            v-model="search"
-           v-on:input="change">
-
-    <span class="icon is-small is-left">
-      <i class="fa fa-search"></i>
-    </span>
+           @input="change">
   </div>
 </template>
 

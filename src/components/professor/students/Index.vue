@@ -5,16 +5,7 @@
           subtitle="students subtitle">
     </hero>
     <div class="columns">
-      <div class="column is-one-third">
-        <list
-          :items="students"
-          :create="true"
-          generalRoute="Students"
-          detailRoute="Student"
-          :setName="studentListEntry">
-        </list>
-      </div>
-      <div class="column is-two-thirds">
+      <div class="column">
           <router-view></router-view>
       </div>
     </div>
