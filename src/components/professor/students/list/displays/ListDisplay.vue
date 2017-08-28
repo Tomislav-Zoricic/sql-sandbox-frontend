@@ -7,7 +7,7 @@
           <div class="columns">
             <div class="column is-three-quarters">
               <router-link :to="{ name: 'Student', params: { id: student.id} }">
-                {{student.first_name}} {{student.last_name}}
+                {{student.first_name}} {{student.last_name}} - {{student.academic_year}}
               </router-link>
             </div>
             <div class="column is-one-quarter is-pulled-right">

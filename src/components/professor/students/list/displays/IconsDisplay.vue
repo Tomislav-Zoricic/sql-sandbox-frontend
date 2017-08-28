@@ -4,7 +4,7 @@
       <div class="card">
         <div class="card-content">
           <p class="title">
-            {{student.first_name}}
+            {{student.first_name}} {{ student.last_name}}
           </p>
           <p class="subtitle">
             {{student.academic_year}}

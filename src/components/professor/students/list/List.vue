@@ -9,11 +9,11 @@
 
     <icons-display
       v-show="isIconsDisplay"
-     :students="filteredStudents">
+     :students="nameFilteredStudents">
     </icons-display>
     <list-display
       v-show="!isIconsDisplay"
-     :students="filteredStudents">
+     :students="nameFilteredStudents">
     </list-display>
   </div>
 </template>
@@ -32,7 +32,7 @@ export default {
     return {
       tab: 'iconsDisplay',
       search: '',
-      academicYear: '2017'
+      academicYear: 2017
     }
   },
 
@@ -48,9 +48,16 @@ export default {
       'students'
     ]),
 
-    filteredStudents () {
-      // NOTE Figure out how to filter when you have first and last name separated.
-      return this.students
+    acFilteredStudents () {
+      const academicYear = parseInt(this.academicYear, 10)
+      return this.students.filter(student => student.academic_year === academicYear)
+    },
+
+    nameFilteredStudents () {
+      return this.acFilteredStudents.filter(({ first_name, last_name }) => {
+        name = (first_name + last_name).toLowerCase()
+        return name.includes(this.search)
+      })
     },
 
     isIconsDisplay () {

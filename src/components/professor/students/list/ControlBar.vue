@@ -36,7 +36,8 @@ export default {
     return {
       search: '',
       academicYear: 2017,
-      academicYears: [ 2017, 2016, 2015, 2014, 2015 ]
+      // NOTE Get set of students academic years and set them here.
+      academicYears: [ 2017, 2016 ]
     }
   }
 }
