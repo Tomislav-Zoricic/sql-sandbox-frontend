@@ -3,7 +3,8 @@
     <tabs :tab="tab" :setActiveTab="setActiveTab"></tabs>
     <control-bar
       :changeSearch="changeSearch"
-      :changeYear="changeYear">
+      :changeYear="changeYear"
+      :academicYears="academicYears">
     </control-bar>
     <hr />
 
@@ -32,7 +33,8 @@ export default {
     return {
       tab: 'iconsDisplay',
       search: '',
-      academicYear: 2017
+      academicYear: 2017,
+      academicYears: [ 2017, 2016, 2015, 2014]
     }
   },
 
@@ -74,7 +76,17 @@ export default {
 
     changeYear ({ target }) {
       this.academicYear = target.value
+    },
+
+    setAcademicYears() {
+      const years = new Set()
+      this.students.forEach(student => years.add(student.academic_year))
+      return Array.from(years)
     }
+  },
+
+  mounted () {
+    this.academicYears = this.setAcademicYears()
   }
 }
 </script>

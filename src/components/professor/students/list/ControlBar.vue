@@ -29,15 +29,20 @@ export default {
     },
     changeYear : {
       type: Function
+    },
+    academicYears: {
+      type: Array,
+      default() {
+        return [ 2017, 2016, 2015, 2014 ]
+      }
     }
   },
 
   data () {
     return {
       search: '',
-      academicYear: 2017,
-      // NOTE Get set of students academic years and set them here.
-      academicYears: [ 2017, 2016 ]
+      // NOTE Remove magic number.
+      academicYear: 2017
     }
   }
 }
