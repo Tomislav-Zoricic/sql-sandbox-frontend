@@ -46,9 +46,9 @@ export default {
   },
 
   computed: {
-    ...mapGetters ([
-      'students'
-    ]),
+    ...mapGetters ({
+      students: 'students/students'
+    }),
 
     acFilteredStudents () {
       const academicYear = parseInt(this.academicYear, 10)

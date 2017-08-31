@@ -67,12 +67,12 @@ export default {
   },
 
   methods: {
-    ...mapActions([
-      'getDatabases',
-      'getQuestions',
-      'getStudents',
-      'getTests'
-    ]),
+    ...mapActions({
+      getDatabases: 'databases/getDatabases',
+      getQuestions: 'databases/getQuestions',
+      'getStudents': 'students/getStudents',
+      'getTests': 'tests/getTests'
+    }),
 
     databaseListEntry (database) {
       return `${database.name}`
@@ -88,11 +88,11 @@ export default {
   },
 
   computed: {
-    ...mapGetters([
-      'databases',
-      'students',
-      'tests'
-    ])
+    ...mapGetters({
+      databases: 'databases/databases',
+      students: 'students/students',
+      tests: 'tests/tests'
+    })
   },
 
   created () {

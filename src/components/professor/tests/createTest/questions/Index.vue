@@ -9,49 +9,19 @@
       </questions-list>
     </div>
     <div class="column is-two-thirds">
-      <rank-questions
-        rank="easy"
-        :questions="selectedQuestions['easy']"
-        :unselectQuestion="unselectQuestion"
-        :numberOfQuestions="questionsTotal.easy">
-      </rank-questions>
-      <rank-questions
-        rank="medium"
-        :questions="selectedQuestions['medium']"
-        :unselectQuestion="unselectQuestion"
-        :numberOfQuestions="questionsTotal.medium">
-      </rank-questions>
-      <rank-questions
-        rank="hard"
-        :questions="selectedQuestions['hard']"
-        :unselectQuestion="unselectQuestion"
-        :numberOfQuestions="questionsTotal.hard">
-      </rank-questions>
+      <selected-questions></selected-questions>
     </div>
   </div>
 </template>
 
 <script>
-/*
-
-  6.8
-  moras u questionlist poslat listu available pitanja,
-  i imati liste odabranih pitanja.
-  najbolje je questionlist drzati kao obican array,
-  a selectana pitanja mogu staviti u objekt sa rankovima kao keyevima
-  question total za svaki rank se onda moze voditi kao size tog arraya,
-  a moze se napraviti computed ako treba totalan broj pitanja
-
-
-
- */
 
 import remove from 'lodash.remove'
 import includes from 'lodash.includes'
 import { mapActions, mapGetters } from 'vuex'
-import List from './../../../common/List'
+import List from './../../../../common/List'
 import QuestionsList from './QuestionsList'
-import RankQuestions from './RankQuestions'
+import SelectedQuestions from './selected/Index'
 
 
 export default {
@@ -86,14 +56,14 @@ export default {
   components: {
     'list': List,
     'questions-list': QuestionsList,
-    'rank-questions': RankQuestions
+    'selected-questions': SelectedQuestions
   },
 
   computed: {
     // NOTE Ako imam i tu getter baze, sto ce mi gore u indexu.
-    ...mapGetters([
-      'databases'
-    ]),
+    ...mapGetters({
+      databases: 'databases/databases'
+    }),
 
     availableQuestions () {
       //NOTE mislim da je problem u tome sto ovaj hvata this.questions,

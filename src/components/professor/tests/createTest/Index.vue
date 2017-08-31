@@ -5,7 +5,6 @@
       <component
         :is="tab"
         :setDatabaseId="setDatabaseId"
-        :questionsTotal="questionsTotal"
         :changeQuestionsNumber="changeQuestionsNumber"
         :questions="databaseQuestions">
       </component>
@@ -24,21 +23,13 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import Tabs from './Tabs'
-import Details from './Details'
-import Questions from './Questions'
-const DEFAULT_QUESTIONS_NUMBER = 1
+import Details from './details/Index'
+import Questions from './questions/Index'
 
 export default {
   data () {
     return {
-      tab: 'testDetails',
-      // NOTE Another way of preselecting default database ??
-      databaseId: 1,
-      questionsTotal: {
-        easy: DEFAULT_QUESTIONS_NUMBER,
-        medium: DEFAULT_QUESTIONS_NUMBER,
-        hard: DEFAULT_QUESTIONS_NUMBER
-      }
+      tab: 'testDetails'
     }
   },
 
@@ -49,10 +40,10 @@ export default {
   },
 
   computed: {
-    ...mapGetters([
-      'databases',
-      'questions'
-    ]),
+    ...mapGetters({
+      databases: 'databases/databases',
+      questions: 'databases/questions'
+    }),
 
     database () {
       if (this.databases.length) {
@@ -66,11 +57,19 @@ export default {
     }
   },
 
+  /*
+    PREFILL CREATE TEST STORE with questions from specific database.
+    Get all databases and set the default questions and database id,
+    from any database received.
+
+
+   */
+
   methods: {
-    ...mapActions([
-      'getDatabases',
-      'getQuestions'
-    ]),
+    ...mapActions({
+      getDatabases: 'databases/getDatabases',
+      getQuestions: 'databases/getQuestions'
+    }),
 
     createTest () {
       console.log('STUP create test')
@@ -90,8 +89,21 @@ export default {
   },
 
   created () {
-    this.getDatabases()
-    this.getQuestions()
+    // Sets databases and questions in store.
+    Promise.all([this.getDatabases(), this.getQuestions()])
+      .then(() => {
+        // Case 1: No databases, break and redirect to creating databases.
+        if (!this.databases.length) {
+          console.log('No databases, redirect to database create page with warning')
+        }
+
+        // Case 2: Set default database.
+        // NOTE Decide further on a way of setting default database.
+        const dbDefault = this.databases[0]
+        const dbQuestions = this.questions[dbDefault.id]
+        this.$store.commit('createTest:setDatabase', dbDefault)
+
+      })
   }
 }
 </script>

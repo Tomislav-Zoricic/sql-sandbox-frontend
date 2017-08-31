@@ -43,43 +43,8 @@
 
 <script>
 export default {
-  props: {
-    rank: {
-      type: String
-    },
-
-    numberOfQuestions: {
-      type: Number,
-      default: 3
-    },
-
-    questions: {
-      type: Array,
-      default () { return [] }
-    },
-
-    unselectQuestion: {
-      type: Function
-    }
-  },
-
-  computed: {
-    rankQuestions () {
-      console.log('rank questions', Array.from(this.questions))
-      return Array.from(this.questions).filter(q => q.rank === this.rank)
-    }
-  },
-
-  methods: {
-    uppercaseFirstLetter (str) {
-      return str.charAt(0).toUpperCase() + str.slice(1);
-    }
-  }
 }
 </script>
 
-<style lang="css" scoped>
-  tr {
-    cursor: pointer;
-  }
+<style lang="css">
 </style>
