@@ -9,7 +9,7 @@
           <input
             class="input"
             type="number"
-            min="0"
+            :min="noSelectedRankQuestions"
             :rank="rank"
             v-model="value"
             @change="changeQuestionsNumber">
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import toastr from 'toastr'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -30,23 +31,45 @@ export default {
 
   computed: {
     ...mapGetters({
-      noOfQuestions: 'createTest/noOfQuestions'
+      noOfQuestions: 'createTest/noOfQuestions',
+      questions: 'createTest/questions',
+      selectedQuestions: 'createTest/selectedQuestions'
     }),
 
     value () {
       return this.noOfQuestions[this.rank]
+    },
+
+    noRankQuestions () {
+      return this.questions.filter(({ rank }) => rank === this.rank).length
+    },
+
+    noSelectedRankQuestions () {
+      return this.selectedQuestions[this.rank].length
     }
   },
 
   methods: {
     changeQuestionsNumber ({ target }) {
-      // NOTE Should have all rank questions, so you can check not to allow
-      // more rank questions then there are in the database.
-      if (true) {
-        this.$store.commit('createTest/changeQuestionsNumber', {
-          rank: this.rank , value: parseInt(target.value, 10)
-        })
+      let value = parseInt(target.value, 10)
+
+      const noQuestions = this.noRankQuestions + this.noSelectedRankQuestions
+
+      if (value > this.noQuestions) {
+        toastr.error(`This database doesn't have ${value} ${this.rank} questions`,
+                    'Something went wrong')
+        value = this.noRankQuestions
       }
+
+      if (value < this.noSelectedRankQuestions) {
+        toastr.error(`Check the number of already selected ${this.rank} questions`,
+                    'Something went wrong')
+        value = this.noSelectedRankQuestions
+      }
+
+      this.$store.commit('createTest/changeQuestionsNumber', {
+          rank: this.rank , value
+        })
     }
   }
 }

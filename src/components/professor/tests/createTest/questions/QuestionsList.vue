@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import toastr from 'toastr'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -48,13 +49,22 @@ export default {
       allDatabases: 'databases/databases',
       allQuestions: 'databases/questions',
       database: 'createTest/database',
-      questions: 'createTest/questions'
+      questions: 'createTest/questions',
+      noOfQuestions: 'createTest/noOfQuestions',
+      selectedQuestions: 'createTest/selectedQuestions'
     })
   },
 
   methods: {
     selectQuestion (question) {
-      this.$store.commit('createTest/selectQuestion', question)
+      const { rank } = question
+      // Check it doesn't cross allowed number or questions for that rank.
+      if (this.noOfQuestions[rank] <= this.selectedQuestions[rank].length) {
+        toastr.error('Something went wrong')
+      } else {
+        this.$store.commit('createTest/selectQuestion', question)
+      }
+
     },
 
     changeDatabase ({ target }) {
