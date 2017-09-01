@@ -16,20 +16,23 @@
     <nav class="panel">
     <div class="panel-block">
       <p class="control has-icons-left">
-        <input class="input is-small" type="text" placeholder="Search">
+        <input class="input is-small" type="text" placeholder="Search" v-model="search">
         <span class="icon is-small is-left">
           <i class="fa fa-search"></i>
         </span>
       </p>
     </div>
     <p class="panel-tabs">
-      <a>Easy</a>
-      <a>Medium</a>
-      <a>Hard</a>
+      <a @click="setRank('easy')"
+         :class="{ 'active': rank === 'easy' }">Easy</a>
+      <a @click="setRank('medium')"
+         :class="{ 'active': rank === 'medium' }">Medium</a>
+      <a @click="setRank('hard')"
+         :class="{ 'active': rank === 'hard' }">Hard</a>
     </p>
     <a
       class="panel-block"
-      v-for="question in questions"
+      v-for="question in searchFilteredQuestions"
       @click="selectQuestion(question)">
         {{question.question}}
     </a>
@@ -42,7 +45,12 @@ import toastr from 'toastr'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  props: {},
+  data () {
+    return {
+      search: '',
+      rank: ''
+    }
+  },
 
   computed: {
     ...mapGetters({
@@ -52,7 +60,16 @@ export default {
       questions: 'createTest/questions',
       noOfQuestions: 'createTest/noOfQuestions',
       selectedQuestions: 'createTest/selectedQuestions'
-    })
+    }),
+
+    rankFilteredQuestions () {
+      return this.rank ? this.questions.filter(q => q.rank === this.rank) :
+             this.questions
+    },
+
+    searchFilteredQuestions () {
+      return this.rankFilteredQuestions.filter(q => q.question.includes(this.search))
+    }
   },
 
   methods: {
@@ -74,10 +91,18 @@ export default {
       const qs = this.allQuestions[target.value]
       this.$store.commit('createTest/setDatabase', db)
       this.$store.commit('createTest/setQuestions', qs)
+    },
+
+    setRank(rank) {
+      this.rank = this.rank === rank ? '' : rank
     }
   }
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
+  .active {
+    color: black;
+    font-size: 15px;
+  }
 </style>
