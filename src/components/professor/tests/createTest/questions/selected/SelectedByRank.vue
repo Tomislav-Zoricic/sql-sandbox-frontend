@@ -8,7 +8,7 @@
           <div class="level-item has-text-centered">
             <div>
               <p class="heading">Rank</p>
-              <p class="title">{{uppercaseFirstLetter(rank)}}</p>
+              <p class="title">{{(rank)}}</p>
             </div>
           </div>
           <div class="level-item has-text-centered">
@@ -20,7 +20,7 @@
           <div class="level-item has-text-centered">
             <div>
               <p class="heading">Out of</p>
-              <p class="title">{{numberOfQuestions}}</p>
+              <p class="title">{{noOfQuestions}}</p>
             </div>
           </div>
         </nav>
@@ -29,8 +29,7 @@
 
         <table class="table is-striped">
           <tbody>
-            <tr v-for="q in questions"
-                @click="unselectQuestion(q)">
+            <tr v-for="q in questions">
               <td>{{q.question}}</td>
             </tr>
           </tbody>
@@ -42,7 +41,24 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
+  props: {
+    rank: String,
+    questions: {
+      type: Array,
+      default () { return [] }
+    },
+    noOfQuestions: {
+      type: Number,
+      default () { return 0 }
+    }
+  },
+
+  methods: {
+
+  }
 }
 </script>
 

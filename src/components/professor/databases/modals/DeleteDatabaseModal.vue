@@ -77,7 +77,7 @@ export default {
         // .then(() => {
         //   axios.delete(deleteQuestionsUrl)
           .then(() => {
-            this.$store.commit('removeDatabase', id)
+            this.$store.commit('databases/removeDatabase', id)
 
             // $deleteBtn.removeClass('is-loading')
             toastr.success('Database deleted, alongside with its questions', 'Successful')

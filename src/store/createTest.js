@@ -16,12 +16,8 @@ const state = {
   duration: DURATION_DEFAULT,
   database: DEFAULT_DATABASE,
 
+  questions: [],
   noOfQuestions: {
-    'easy': NO_OF_QUESTIONS_DEFAULT,
-    'medium': NO_OF_QUESTIONS_DEFAULT,
-    'hard': NO_OF_QUESTIONS_DEFAULT
-  },
-  allowedNoOfQuestions: {
     'easy': NO_OF_QUESTIONS_DEFAULT,
     'medium': NO_OF_QUESTIONS_DEFAULT,
     'hard': NO_OF_QUESTIONS_DEFAULT
@@ -38,8 +34,8 @@ const getters = {
   date: state => state.date,
   duration: state => state.duration,
   database: state => state.database,
+  questions: state => state.questions,
   noOfQuestions: state => state.noOfQuestions,
-  allowedNoOfQuestions: state => state.allowedNoOfQuestions,
   selectedQuestions: state => state.selectedQuestions
 }
 
@@ -50,6 +46,10 @@ const mutations = {
 
   setQuestions (state, payload) {
     state.questions = payload
+  },
+
+  changeQuestionsNumber(state, { rank, value }) {
+    state.noOfQuestions[rank] = value
   },
 
   // Add after localhost:3000/question post
@@ -77,5 +77,9 @@ const actions = {
 }
 
 export default {
-  state, getters, actions, mutations
+  namespaced: true,
+  state,
+  getters,
+  mutations,
+  actions
 }

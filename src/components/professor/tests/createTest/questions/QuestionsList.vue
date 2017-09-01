@@ -3,10 +3,9 @@
     <div class="field has-addons">
     <p class="control is-expanded">
       <span class="select is-fullwidth">
-        <select name="Database"
-                @change="setDatabaseId">
+        <select name="Database" @change="changeDatabase">
           <option
-            v-for="database in databases"
+            v-for="database in allDatabases"
             :value="database.id">
               {{database.name}}
           </option>
@@ -39,24 +38,31 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
-  props: {
-    databases: {
-      type: Array,
-      default () { return [] }
+  props: {},
+
+  computed: {
+    ...mapGetters({
+      allDatabases: 'databases/databases',
+      allQuestions: 'databases/questions',
+      database: 'createTest/database',
+      questions: 'createTest/questions'
+    })
+  },
+
+  methods: {
+    selectQuestion () {
+      console.log('hit me baby one more time')
     },
 
-    setDatabaseId: {
-      type: Function
-    },
-
-    questions: {
-      type: Array,
-      default () { return [] }
-    },
-
-    selectQuestion: {
-      type: Function
+    changeDatabase ({ target }) {
+      // NOTE Do i even need an entire database? db_id could/should be enough.
+      const db = this.allDatabases.filter(db => db.id === target.value)[0]
+      const qs = this.allQuestions[target.value]
+      this.$store.commit('createTest/setDatabase', db)
+      this.$store.commit('createTest/setQuestions', qs)
     }
   }
 }
