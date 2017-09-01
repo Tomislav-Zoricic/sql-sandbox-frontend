@@ -27,25 +27,24 @@ export default {
     rank: String
   },
 
-  data () {
-    return {
-      value : 0
-    }
-  },
 
   computed: {
     ...mapGetters({
-      moOfQuestions: 'createTest/noOfQuestions'
-    })
+      noOfQuestions: 'createTest/noOfQuestions'
+    }),
+
+    value () {
+      return this.noOfQuestions[this.rank]
+    }
   },
 
   methods: {
-    changeQuestionsNumber (event) {
+    changeQuestionsNumber ({ target }) {
       // NOTE Should have all rank questions, so you can check not to allow
       // more rank questions then there are in the database.
       if (true) {
         this.$store.commit('createTest/changeQuestionsNumber', {
-          rank: this.rank , value: parseInt(this.value, 10)
+          rank: this.rank , value: parseInt(target.value, 10)
         })
       }
     }

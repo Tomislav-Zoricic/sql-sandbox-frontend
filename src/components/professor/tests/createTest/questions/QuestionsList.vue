@@ -53,12 +53,13 @@ export default {
   },
 
   methods: {
-    selectQuestion () {
-      console.log('hit me baby one more time')
+    selectQuestion (question) {
+      this.$store.commit('createTest/selectQuestion', question)
     },
 
     changeDatabase ({ target }) {
       // NOTE Do i even need an entire database? db_id could/should be enough.
+      // Selected questions should be removed once the database is changed.
       const db = this.allDatabases.filter(db => db.id === target.value)[0]
       const qs = this.allQuestions[target.value]
       this.$store.commit('createTest/setDatabase', db)

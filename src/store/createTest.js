@@ -1,7 +1,3 @@
-// const state = {}
-// const getters = {}
-// const actions = {}
-// const mutations = {}
 import moment from 'moment'
 
 const NO_OF_QUESTIONS_DEFAULT = 1
@@ -53,14 +49,15 @@ const mutations = {
   },
 
   // Add after localhost:3000/question post
-  addQuestion (state, payload) {
-    console.log('questions', state.questions[payload.database_id], payload)
-    state.questions[payload.database_id].push(payload);
+  selectQuestion (state, question) {
+    state.selectedQuestions[question.rank].push(question);
+    state.questions = state.questions.filter(q  => q !== question)
   },
 
-  removeQuestion (state, { q_id, db_id }) {
-    console.log('removing question', db_id, q_id, state.questions[db_id])
-    state.questions[db_id] = state.questions[db_id].filter(q => q.id !== q_id)
+  deselectQuestion (state, question) {
+    state.questions.push(question)
+    const { rank } = question
+    state.selectedQuestions[rank] = state.selectedQuestions[rank].filter(q  => q !== question)
   },
 
   addDatabase (state, payload) {

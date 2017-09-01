@@ -29,8 +29,10 @@
 
         <table class="table is-striped">
           <tbody>
-            <tr v-for="q in questions">
-              <td>{{q.question}}</td>
+            <tr v-for="question in questions">
+              <td class="table-item" @click="deselectQuestion(question)">
+                {{question.question}}
+              </td>
             </tr>
           </tbody>
         </table>
@@ -57,10 +59,15 @@ export default {
   },
 
   methods: {
-
+    deselectQuestion (question) {
+      this.$store.commit('createTest/deselectQuestion', question)
+    }
   }
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
+  .table-item {
+    cursor: pointer;
+  }
 </style>
