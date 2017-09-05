@@ -15,10 +15,10 @@ import Student from '@/components/professor/students/Student'
 import StudentsList from '@/components/professor/students/list/List'
 import CreateStudent from '@/components/professor/students/CreateStudent'
 
-import TestsIndex from '@/components/professor/tests/Index'
-import TestsList from '@/components/professor/tests/List'
-import Test from '@/components/professor/tests/test/Test'
-import CreateTest from '@/components/professor/tests/createTest/Index'
+import ExamsIndex from '@/components/professor/tests/Index'
+import ExamsList from '@/components/professor/tests/List'
+import Exam from '@/components/professor/tests/test/Test'
+import CreateExam from '@/components/professor/tests/createTest/Index'
 
 
 
@@ -64,22 +64,22 @@ export default new Router({
     // from students Test (active test) and students tests history.
     {
       path: '/professor/tests',
-      name: 'TestsIndex',
-      component: TestsIndex,
+      name: 'ExamsIndex',
+      component: ExamsIndex,
       children: [{
         path: ':id/details',
         name: 'Test',
-        component: Test
+        component: Exam
       },
       {
         path: 'all',
-        name: 'TestsList',
-        component: TestsList
+        name: 'ExamsList',
+        component: ExamsList
       },
       {
         path: 'create',
-        name: 'CreateTest',
-        component: CreateTest
+        name: 'CreateExam',
+        component: CreateExam
       }]
     },
 

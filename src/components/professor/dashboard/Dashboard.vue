@@ -20,10 +20,10 @@
       </div>
       <div class="column is-one-third">
         <list
-          title="Tests"
-          generalRoute="TestsList"
+          title="Exams"
+          generalRoute="ExamsList"
           :items="tests"
-          detailRoute="Test"
+          detailRoute="Exam"
           :setName="testListEntry">
         </list>
 
