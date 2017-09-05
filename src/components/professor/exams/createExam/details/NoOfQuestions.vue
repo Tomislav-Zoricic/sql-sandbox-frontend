@@ -1,4 +1,4 @@
-<template lang="html">
+createExam/<template lang="html">
   <div class="field is-horizontal">
     <div class="field-label is-normal">
       <label class="label">{{rank}}</label>
@@ -31,9 +31,9 @@ export default {
 
   computed: {
     ...mapGetters({
-      noOfQuestions: 'createTest/noOfQuestions',
-      questions: 'createTest/questions',
-      selectedQuestions: 'createTest/selectedQuestions'
+      noOfQuestions: 'createExam/noOfQuestions',
+      questions: 'createExam/questions',
+      selectedQuestions: 'createExam/selectedQuestions'
     }),
 
     value () {
@@ -67,7 +67,7 @@ export default {
         value = this.noSelectedRankQuestions
       }
 
-      this.$store.commit('createTest/changeQuestionsNumber', {
+      this.$store.commit('createExam/changeQuestionsNumber', {
           rank: this.rank , value
         })
     }

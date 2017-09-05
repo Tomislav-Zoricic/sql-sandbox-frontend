@@ -22,12 +22,12 @@
         <list
           title="Exams"
           generalRoute="ExamsList"
-          :items="tests"
+          :items="exams"
           detailRoute="Exam"
-          :setName="testListEntry">
+          :setName="examListEntry">
         </list>
 
-        <grid-loader :loading="tests.length === 0">
+        <grid-loader :loading="exams.length === 0">
         </grid-loader>
       </div>
       <div class="column is-one-third">
@@ -71,15 +71,15 @@ export default {
       getDatabases: 'databases/getDatabases',
       getQuestions: 'databases/getQuestions',
       'getStudents': 'students/getStudents',
-      'getTests': 'tests/getTests'
+      'getExams': 'exams/getExams'
     }),
 
     databaseListEntry (database) {
       return `${database.name}`
     },
 
-    testListEntry (test) {
-      return `Test date: ${test.date}`
+    examListEntry (exam) {
+      return `Exam date: ${exam.date}`
     },
 
     studentListEntry (student) {
@@ -91,7 +91,7 @@ export default {
     ...mapGetters({
       databases: 'databases/databases',
       students: 'students/students',
-      tests: 'tests/tests'
+      exams: 'exams/exams'
     })
   },
 
@@ -101,7 +101,7 @@ export default {
       this.getDatabases()
       this.getQuestions()
       this.getStudents()
-      this.getTests()
+      this.getExams()
     }, 3000)
   }
 

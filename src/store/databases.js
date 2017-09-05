@@ -25,12 +25,10 @@ const mutations = {
   },
   // Add after localhost:3000/question post
   addQuestion (state, payload) {
-    console.log('questions', state.questions[payload.database_id], payload)
     state.questions[payload.database_id].push(payload);
   },
 
   removeQuestion (state, { q_id, db_id }) {
-    console.log('removing question', db_id, q_id, state.questions[db_id])
     state.questions[db_id] = state.questions[db_id].filter(q => q.id !== q_id)
   },
 

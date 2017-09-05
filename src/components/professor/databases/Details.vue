@@ -78,7 +78,7 @@ export default {
 
   data () {
     return {
-      dbId: parseInt(this.$route.params.id, 10),
+    //  dbId: parseInt(this.$route.params.id, 10),
       dataValid: true,
       isCheckingDiagram: false
     }

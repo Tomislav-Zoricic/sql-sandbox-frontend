@@ -60,7 +60,7 @@ export default {
 
   methods: {
     deselectQuestion (question) {
-      this.$store.commit('createTest/deselectQuestion', question)
+      this.$store.commit('createExam/deselectQuestion', question)
     }
   }
 }

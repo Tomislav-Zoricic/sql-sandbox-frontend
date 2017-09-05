@@ -56,10 +56,10 @@ export default {
     ...mapGetters({
       allDatabases: 'databases/databases',
       allQuestions: 'databases/questions',
-      database: 'createTest/database',
-      questions: 'createTest/questions',
-      noOfQuestions: 'createTest/noOfQuestions',
-      selectedQuestions: 'createTest/selectedQuestions'
+      database: 'createExam/database',
+      questions: 'createExam/questions',
+      noOfQuestions: 'createExam/noOfQuestions',
+      selectedQuestions: 'createExam/selectedQuestions'
     }),
 
     rankFilteredQuestions () {
@@ -79,7 +79,7 @@ export default {
       if (this.noOfQuestions[rank] <= this.selectedQuestions[rank].length) {
         toastr.error('Something went wrong')
       } else {
-        this.$store.commit('createTest/selectQuestion', question)
+        this.$store.commit('createExam/selectQuestion', question)
       }
 
     },
@@ -89,8 +89,8 @@ export default {
       // Selected questions should be removed once the database is changed.
       const db = this.allDatabases.filter(db => db.id === target.value)[0]
       const qs = this.allQuestions[target.value]
-      this.$store.commit('createTest/setDatabase', db)
-      this.$store.commit('createTest/setQuestions', qs)
+      this.$store.commit('createExam/setDatabase', db)
+      this.$store.commit('createExam/setQuestions', qs)
     },
 
     setRank(rank) {

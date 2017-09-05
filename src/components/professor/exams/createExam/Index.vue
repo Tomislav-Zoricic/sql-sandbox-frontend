@@ -7,8 +7,8 @@
     <div class="field">
       <p class="control">
         <a class="button is-primary is-outlined is-stretched is-large"
-           @click="createTest">
-            Create test
+           @click="createExam">
+            Create Exam
         </a>
       </p>
     </div>
@@ -24,14 +24,14 @@ import Questions from './questions/Index'
 export default {
   data () {
     return {
-      tab: 'testDetails'
+      tab: 'examDetails'
     }
   },
 
   components: {
     'tabs': Tabs,
-    'testDetails': Details,
-    'testQuestions': Questions
+    'examDetails': Details,
+    'examQuestions': Questions
   },
 
   computed: {
@@ -47,8 +47,8 @@ export default {
       getQuestions: 'databases/getQuestions'
     }),
 
-    createTest () {
-      console.log('STUP create test')
+    createExam () {
+      console.log('STUP create exam')
     },
 
     setActiveTab (tab) { this.tab = tab },
@@ -72,8 +72,8 @@ export default {
         // NOTE Decide further on a way of setting default database.
         const dbDefault = this.databases[0]
         const dbQuestions = this.questions[dbDefault.id]
-        this.$store.commit('createTest/setDatabase', dbDefault)
-        this.$store.commit('createTest/setQuestions', dbQuestions)
+        this.$store.commit('createExam/setDatabase', dbDefault)
+        this.$store.commit('createExam/setQuestions', dbQuestions)
       })
   }
 }

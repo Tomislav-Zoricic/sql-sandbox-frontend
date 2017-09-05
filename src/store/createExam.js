@@ -1,13 +1,13 @@
 import moment from 'moment'
 
 const NO_OF_QUESTIONS_DEFAULT = 1
-const TEST_NAME_DEFAULT = 'Default test name'
+const EXAM_NAME_DEFAULT = 'Default exam name'
 const DATE_DEFAULT = moment().format("YYYY-MM-DD")
 const DURATION_DEFAULT = 60
 const DEFAULT_DATABASE = { name: 'Default Database Name'}
 
 const state = {
-  name: TEST_NAME_DEFAULT,
+  name: EXAM_NAME_DEFAULT,
   date: DATE_DEFAULT,
   duration: DURATION_DEFAULT,
   database: DEFAULT_DATABASE,

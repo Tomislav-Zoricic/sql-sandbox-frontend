@@ -25,13 +25,13 @@
       </div>
 
       <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">Tests</a>
+        <a class="navbar-link">Exams</a>
         <div class="navbar-dropdown ">
           <router-link class="navbar-item" :to="{ name: 'ExamsList' }">
-            Tests
+            Exams
           </router-link>
           <router-link class="navbar-item" :to="{ name: 'CreateExam' }">
-            Create Test
+            Create Exam
           </router-link>
         </div>
       </div>

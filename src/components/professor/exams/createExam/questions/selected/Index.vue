@@ -30,8 +30,8 @@ export default {
 
   computed: {
     ...mapGetters({
-      selectedQuestions: 'createTest/selectedQuestions',
-      noOfQuestions: 'createTest/noOfQuestions'
+      selectedQuestions: 'createExam/selectedQuestions',
+      noOfQuestions: 'createExam/noOfQuestions'
     })
   },
 
