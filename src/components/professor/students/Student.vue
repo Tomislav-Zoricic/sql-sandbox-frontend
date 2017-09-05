@@ -13,7 +13,7 @@ import { mapActions } from 'vuex'
 import Tabs from './Tabs'
 import List from './../../common/List'
 import Details from './Details'
-import Tests from './Tests'
+import Exams from './Exams'
 
 export default {
   name: 'details',
@@ -28,12 +28,12 @@ export default {
     'tabs': Tabs,
     'list': List,
     'studentDetails': Details,
-    'studentTests': Tests
+    'studentExams': Exams
   },
 
   computed: {
     isDetailsTab () { return this.tab === 'studentDetails' },
-    isTestsTab () { return this.tab === 'studentTests' },
+    isExamsTab () { return this.tab === 'studentExams' },
     student () {
       const students = this.$store.getters.students
       const id = parseInt(this.$route.params.id, 10)

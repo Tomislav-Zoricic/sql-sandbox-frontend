@@ -1,7 +1,7 @@
 <template lang="html">
     <div class="columns">
       <div class="column is-one-third is-offset-one-third">
-          list of tests
+          list of exams
       </div>
     </div>
 </template>

@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="">
-    results student
+    student exams
   </div>
 </template>
 

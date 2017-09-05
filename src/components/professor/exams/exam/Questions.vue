@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="">
-    inspect test questions
+    inspect exam questions
   </div>
 </template>
 

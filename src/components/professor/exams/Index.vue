@@ -1,8 +1,8 @@
 <template lang="html">
   <div class="container">
     <navbar></navbar>
-    <hero title="Tests"
-          subtitle="tests subtitle">
+    <hero title="Exams"
+          subtitle="Exams subtitle">
     </hero>
     <router-view></router-view>
   </div>

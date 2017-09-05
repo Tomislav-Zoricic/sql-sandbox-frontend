@@ -1,6 +1,6 @@
 <template lang="html">
   <h1>
-    professor test details
+    professor exam details
   </h1>
 </template>
 

@@ -66,6 +66,7 @@ export default {
     database () {
       const id = parseInt(this.$route.params.id, 10)
       if (this.databases.length) {
+        // Check whether exists?
         const database = this.databases.filter(db => db.id === id)[0]
         return database
       }
