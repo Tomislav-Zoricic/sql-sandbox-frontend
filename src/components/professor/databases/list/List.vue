@@ -59,10 +59,10 @@ export default {
   },
 
   computed: {
-    ...mapGetters ([
-      'databases',
-      'questions'
-    ]),
+    ...mapGetters ({
+      databases: 'databases/databases',
+      questions: 'questions'
+    }),
 
     isIconsDisplay () {
         return this.tab === 'iconsDisplay'

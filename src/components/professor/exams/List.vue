@@ -1,11 +1,9 @@
 <template lang="html">
-  <div class="container">
-    <navbar></navbar>
-    <hero title="Tests"
-          subtitle="tests subtitle">
-    </hero>
-    <router-view></router-view>
-  </div>
+    <div class="columns">
+      <div class="column is-one-third is-offset-one-third">
+          list of exams
+      </div>
+    </div>
 </template>
 
 <script>

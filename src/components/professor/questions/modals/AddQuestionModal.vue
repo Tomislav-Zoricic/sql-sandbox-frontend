@@ -115,7 +115,7 @@ export default {
           'database_id': this.databaseId
         })
         .then(({ data: question }) => {
-          this.$store.commit('addQuestion', question)
+          this.$store.commit('databases/addQuestion', question)
 
           $addBtn.removeClass('is-loading')
           toastr.success('Question created', 'Successful')

@@ -15,10 +15,10 @@ import Student from '@/components/professor/students/Student'
 import StudentsList from '@/components/professor/students/list/List'
 import CreateStudent from '@/components/professor/students/CreateStudent'
 
-import TestsIndex from '@/components/professor/tests/Index'
-import TestsList from '@/components/professor/tests/List'
-import Test from '@/components/professor/tests/test/Test'
-import CreateTest from '@/components/professor/tests/createTest/Index'
+import ExamsIndex from '@/components/professor/exams/Index'
+import ExamsList from '@/components/professor/exams/List'
+import Exam from '@/components/professor/exams/exam/Exam'
+import CreateExam from '@/components/professor/exams/createExam/Index'
 
 
 
@@ -59,27 +59,24 @@ export default new Router({
       }]
     },
 
-    // NOTE Once students part of the app becomes active,
-    // this Test / Tests should be renamed in order to remove ambiguity
-    // from students Test (active test) and students tests history.
     {
-      path: '/professor/tests',
-      name: 'TestsIndex',
-      component: TestsIndex,
+      path: '/professor/exams',
+      name: 'ExamsIndex',
+      component: ExamsIndex,
       children: [{
         path: ':id/details',
-        name: 'Test',
-        component: Test
+        name: 'Exam',
+        component: Exam
       },
       {
         path: 'all',
-        name: 'TestsList',
-        component: TestsList
+        name: 'ExamsList',
+        component: ExamsList
       },
       {
         path: 'create',
-        name: 'CreateTest',
-        component: CreateTest
+        name: 'CreateExam',
+        component: CreateExam
       }]
     },
 

@@ -52,7 +52,7 @@ export default {
         url_diagram: this.database.url_diagram
       })
       .then(({ data: database }) => {
-        this.$store.commit('addDatabase', database)
+        this.$store.commit('databases/addDatabase', database)
 
         // Clear input data
         this.database.name = 'Database'

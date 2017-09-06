@@ -9,10 +9,10 @@
         </a>
       </li>
       <li @click="setActiveTab('testQuestions')"
-        :class="{ 'is-active': isTestsTab }">
+        :class="{ 'is-active': isQuestionsTab }">
         <a>
           <span class="icon is-small"><i class="fa fa-question-circle"></i></span>
-          <span>Tests</span>
+          <span>Questions</span>
         </a>
       </li>
     </ul>
@@ -33,7 +33,7 @@ export default {
 
   computed: {
     isDetailsTab () { return this.tab === 'testDetails' },
-    isTestsTab () { return this.tab === 'testQuestions' }
+    isQuestionsTab () { return this.tab === 'testQuestions' }
   }
 }
 </script>

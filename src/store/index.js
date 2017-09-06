@@ -2,15 +2,15 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import databases from './databases.js'
 import students from './students.js'
-import activeTest from './activeTest.js'
-import testsHistory from './testsHistory.js'
+import createExam from './createExam.js'
+import exams from './exams.js'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
     databases,
     students,
-    activeTest,
-    testsHistory
+    createExam,
+    exams
   }
 })

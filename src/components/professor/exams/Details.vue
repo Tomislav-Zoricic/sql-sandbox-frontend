@@ -1,7 +1,7 @@
 <template lang="html">
-  <div class="">
-    inspect test students
-  </div>
+  <h1>
+    professor exam details
+  </h1>
 </template>
 
 <script>

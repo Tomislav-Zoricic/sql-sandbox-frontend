@@ -28,15 +28,15 @@ export default {
   },
 
   computed: {
-    ...mapGetters([
-      'students'
-    ])
+    ...mapGetters({
+      students: 'students/students'
+    })
   },
 
   methods: {
-    ...mapActions([
-      'getStudents'
-    ]),
+    ...mapActions({
+      getStudents: 'students/getStudents'
+    }),
 
     studentListEntry (student) {
       return `${student.academic_year} - ${student.first_name} ${student.last_name}`
