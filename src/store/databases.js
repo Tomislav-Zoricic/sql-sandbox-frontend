@@ -23,17 +23,20 @@ const mutations = {
   setQuestions (state, payload) {
     state.questions = propertyArrangement(payload, 'database_id')
   },
-  // Add after localhost:3000/question post
+
   addQuestion (state, payload) {
     state.questions[payload.database_id].push(payload);
   },
 
+  // NOTE Still discusion whether removing/updating question
+  // will be possible because of cascades related to tests.
   removeQuestion (state, { q_id, db_id }) {
     state.questions[db_id] = state.questions[db_id].filter(q => q.id !== q_id)
   },
 
   addDatabase (state, payload) {
     state.databases.push(payload);
+    state.questions[payload.id] = []
   },
 
   removeDatabase (state, id) {
@@ -64,9 +67,43 @@ const actions = {
           toastr.error('Retrieving questions', 'Something went wrong')
         }
       })
+  },
+
+  createDatabase ({ commit }, data) {
+    const messageSubtitle = 'Creating database'
+    return axios.post(`${URL}/databases`, data)
+        .then(({ status, statusText, data }) => {
+          if (checkStatus(status, statusText)) {
+            toastr.success(messageSubtitle, 'Successful')
+            commit('addDatabase', data)
+          } else {
+            toastr.error(messageSubtitle, 'Something went wrong')
+          }
+
+          return data
+        })
+  },
+
+  createQuestion ({ commit }, data) {
+    const messageSubtitle = 'Creating question'
+    return axios.post(`${URL}/questions`, data)
+        .then(({ status, statusText, data }) => {
+          if (checkStatus(status, statusText)) {
+            toastr.success(messageSubtitle, 'Successful')
+            commit('addQuestion', data)
+          } else {
+            toastr.error(messageSubtitle, 'Something went wrong')
+          }
+
+          return data
+        })
   }
 }
 
+// statusText added for later use.
+function checkStatus(status, statusText) {
+  return status.toString() && status.toString().startsWith(2);
+}
 export default {
   namespaced: true,
   state,

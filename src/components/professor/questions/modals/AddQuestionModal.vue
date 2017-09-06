@@ -54,9 +54,9 @@
 
       <footer class="modal-card-foot">
         <a class="button is-success"
-           @click="addQuestion"
+           @click="createQuestion"
            :disabled="!this.question || !this.answer ? true : false"
-           ref="addQuestionButton">
+           ref="createQuestionButton">
             Add
         </a>
         <a class="button"
@@ -68,6 +68,7 @@
 
 <script>
 import $ from 'jquery'
+import { mapActions } from 'vuex'
 import axios from 'axios'
 import toastr from 'toastr'
 
@@ -101,22 +102,25 @@ export default {
   },
 
   methods: {
-    addQuestion () {
+    ...mapActions({
+      newQuestion: 'databases/createQuestion'
+    }),
+
+    createQuestion () {
       if (!this.validateData()) return
 
-      // NOTE Validate question adding.
-      const $addBtn = $(this.$refs.addQuestionButton)
+      const $addBtn = $(this.$refs.createQuestionButton)
       $addBtn.addClass('is-loading')
 
-      axios.post('http://localhost:3000/questions', {
+      const q = {
           question: this.question,
           answer: this.answer,
           rank: this.rank,
           'database_id': this.databaseId
-        })
-        .then(({ data: question }) => {
-          this.$store.commit('databases/addQuestion', question)
+        }
 
+      this.newQuestion(q)
+        .then(question => {
           $addBtn.removeClass('is-loading')
           toastr.success('Question created', 'Successful')
           this.toggle()

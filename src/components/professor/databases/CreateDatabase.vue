@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import axios from 'axios'
 import toastr from 'toastr'
 import Details from './Details'
@@ -44,28 +45,24 @@ export default {
   },
 
   methods: {
+    ...mapActions({
+      newDatabase: 'databases/createDatabase'
+    }),
+
     createDatabase () {
-      // NOTE Check whether database with same name already exists.
-      axios.post('http://localhost:3000/databases',{
-        name: this.database.name,
-        description: this.database.description,
-        url_diagram: this.database.url_diagram
-      })
-      .then(({ data: database }) => {
-        this.$store.commit('databases/addDatabase', database)
+      this.newDatabase(this.database)
+        .then(({ id }) => {
+          // Clear input data.
+          this.database.name = 'Database'
+          this.database.description = 'Description'
+          this.database.url_diagram = 'URL Diagram'
 
-        // Clear input data
-        this.database.name = 'Database'
-        this.database.description = 'Description'
-        this.database.url_diagram = 'URL Diagram'
-
-        this.$router.push({ name: 'Database', params: { id: database.id }})
-        toastr.success('Creating database', 'Successful')
-
-      })
+          this.$router.push({ name: 'Database', params: { id }})
+          toastr.success('Creating database', 'Successful')
+        })
       .catch(error => {
         toastr.error(error, 'Something went wrong')
-      });
+      })
     },
 
     setDataValidation (valid) {
