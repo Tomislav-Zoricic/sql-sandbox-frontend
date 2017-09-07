@@ -1,14 +1,14 @@
 <template lang="html">
   <div class="tabs is-large">
     <ul class="is-centered">
-      <li @click="setActiveTab('testDetails')"
+      <li @click="setActiveTab('examDetails')"
         :class="{ 'is-active': isDetailsTab }">
         <a>
           <span class="icon is-small"><i class="fa fa-info-circle"></i></span>
           <span>Details</span>
         </a>
       </li>
-      <li @click="setActiveTab('testQuestions')"
+      <li @click="setActiveTab('examQuestions')"
         :class="{ 'is-active': isQuestionsTab }">
         <a>
           <span class="icon is-small"><i class="fa fa-question-circle"></i></span>
@@ -32,8 +32,8 @@ export default {
   },
 
   computed: {
-    isDetailsTab () { return this.tab === 'testDetails' },
-    isQuestionsTab () { return this.tab === 'testQuestions' }
+    isDetailsTab () { return this.tab === 'examDetails' },
+    isQuestionsTab () { return this.tab === 'examQuestions' }
   }
 }
 </script>
