@@ -46,7 +46,6 @@
 <script>
 import axios from 'axios'
 import toastr from 'toastr'
-import { mapActions } from 'vuex'
 import CheckDiagramModal from './modals/CheckDiagramModal'
 
 const URL = 'http://localhost:3000'

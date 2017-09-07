@@ -1,6 +1,6 @@
 import axios from 'axios'
 import toastr from 'toastr'
-import { URL, STATUS_OK } from './../../config/dev.env.js'
+import { API_URL, STATUS_OK } from './../../config/dev.env.js'
 
 const state = {
   exams: []
@@ -11,7 +11,7 @@ const getters = {
 
 const actions = {
   getExams (context) {
-    axios.get(`${URL}/exams`)
+    axios.get(`${API_URL}/exams`)
       .then(({ status, statusText, data }) => {
         if (status === STATUS_OK) {
           toastr.success('Retrieving exams', 'Successful')
