@@ -60,9 +60,9 @@ export default {
           this.$router.push({ name: 'Database', params: { id }})
           toastr.success('Creating database', 'Successful')
         })
-      .catch(error => {
-        toastr.error(error, 'Something went wrong')
-      })
+        .catch(error => {
+          toastr.error(error, 'Something went wrong')
+        })
     },
 
     setDataValidation (valid) {

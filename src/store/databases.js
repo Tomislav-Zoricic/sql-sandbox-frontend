@@ -2,7 +2,7 @@ import axios from 'axios'
 import toastr from 'toastr'
 import isEqual from 'lodash.isequal'
 import { propertyArrangement } from './../helpers/propertyArrangement'
-import { URL, STATUS_OK } from './../../config/dev.env.js'
+import { API_URL, STATUS_OK } from './../../config/dev.env.js'
 
 const state = {
   databases: [],
@@ -46,9 +46,9 @@ const mutations = {
 
 const actions = {
   getDatabases ({ commit }) {
-    return axios.get(`${URL}/databases`)
+    return axios.get(`${API_URL}/databases`)
         .then(({ status, statusText, data }) => {
-          if (status === STATUS_OK) {
+          if (checkStatus(status, statusText)) {
             toastr.success('Retrieving databases', 'Successful')
             commit('setDatabases', data)
           } else {
@@ -58,9 +58,9 @@ const actions = {
   },
 
   getQuestions ({ commit }) {
-    return axios.get(`${URL}/questions`)
+    return axios.get(`${API_URL}/questions`)
       .then(({ status, statusText, data }) => {
-        if (status === STATUS_OK) {
+        if (checkStatus(status, statusText)) {
           toastr.success('Retrieving questions', 'Successful')
           commit('setQuestions', data)
         } else {
@@ -71,7 +71,7 @@ const actions = {
 
   createDatabase ({ commit }, data) {
     const messageSubtitle = 'Creating database'
-    return axios.post(`${URL}/databases`, data)
+    return axios.post(`${API_URL}/databases`, data)
         .then(({ status, statusText, data }) => {
           if (checkStatus(status, statusText)) {
             toastr.success(messageSubtitle, 'Successful')
@@ -86,7 +86,7 @@ const actions = {
 
   createQuestion ({ commit }, data) {
     const messageSubtitle = 'Creating question'
-    return axios.post(`${URL}/questions`, data)
+    return axios.post(`${API_URL}/questions`, data)
         .then(({ status, statusText, data }) => {
           if (checkStatus(status, statusText)) {
             toastr.success(messageSubtitle, 'Successful')

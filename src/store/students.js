@@ -1,6 +1,6 @@
 import axios from 'axios'
 import toastr from 'toastr'
-import { URL, STATUS_OK } from './../../config/dev.env.js'
+import { API_URL, STATUS_OK } from './../../config/dev.env.js'
 
 const state = {
   students: []
@@ -18,7 +18,7 @@ const mutations = {
 
 const actions = {
   getStudents (context) {
-    axios.get(`${URL}/students`)
+    axios.get(`${API_URL}/students`)
       .then(({ status, statusText, data }) => {
         if (status === STATUS_OK) {
           toastr.success('Retrieving students', 'Successful')

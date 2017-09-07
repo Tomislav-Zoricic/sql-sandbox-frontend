@@ -55,8 +55,8 @@
       <footer class="modal-card-foot">
         <a class="button is-success"
            @click="createQuestion"
-           :disabled="!this.question || !this.answer ? true : false"
-           ref="createQuestionButton">
+           :class="{ 'is-loading': isCreatingQuestion }"
+           :disabled="!this.question || !this.answer ? true : false">
             Add
         </a>
         <a class="button"
@@ -97,7 +97,8 @@ export default {
     return {
       question: '',
       answer: '',
-      rank: 'easy'
+      rank: 'easy',
+      isCreatingQuestion: false
     }
   },
 
@@ -108,20 +109,18 @@ export default {
 
     createQuestion () {
       if (!this.validateData()) return
+      this.isCreatingQuestion = true
 
-      const $addBtn = $(this.$refs.createQuestionButton)
-      $addBtn.addClass('is-loading')
+      const questionPayload = {
+        question: this.question,
+        answer: this.answer,
+        rank: this.rank,
+        'database_id': this.databaseId
+      }
 
-      const q = {
-          question: this.question,
-          answer: this.answer,
-          rank: this.rank,
-          'database_id': this.databaseId
-        }
-
-      this.newQuestion(q)
+      this.newQuestion(questionPayload)
         .then(question => {
-          $addBtn.removeClass('is-loading')
+          this.isCreatingQuestion = false
           toastr.success('Question created', 'Successful')
           this.toggle()
 
@@ -132,13 +131,14 @@ export default {
         .catch(error => {
           toastr.error(error, 'Something went wrong')
           this.toggle()
-        });
+        })
     },
 
     validateData () {
       // NOTE Can do some better validation than this one.
+      const messageSubtitle = 'Check your form, quesiton or answer might be missing'
       if (!this.question || !this.answer) {
-        toastr.error('Check your form, quesiton or answer might be missing', 'Something went wrong')
+        toastr.error(messageSubtitle, 'Something went wrong')
         return false
       }
       return true

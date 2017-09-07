@@ -9,5 +9,8 @@ module.exports = {
           "impliedStrict": false,
           "jsx": false
       }
+    },
+    "rules": {
+       "indent": ["error", 2]
     }
 };
