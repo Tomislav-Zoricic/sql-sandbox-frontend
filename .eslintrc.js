@@ -12,6 +12,7 @@ module.exports = {
     },
     "rules": {
        "indent": ["error", 2],
-       "comma-dangle": ["error", "never"]
+       "comma-dangle": ["error", "never"],
+       "semi": [2, "never"]
     }
 };

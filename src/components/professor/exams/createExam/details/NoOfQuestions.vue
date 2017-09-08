@@ -68,8 +68,8 @@ export default {
       }
 
       this.$store.commit('createExam/changeQuestionsNumber', {
-          rank: this.rank , value
-        })
+        rank: this.rank , value
+      })
     }
   }
 }

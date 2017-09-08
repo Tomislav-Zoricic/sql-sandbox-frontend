@@ -64,7 +64,7 @@ export default {
     isDetailsTab () { return this.tab === 'examDetails' },
     isQuestionsTab () { return this.tab === 'examQuestions' },
     isStudentsTab () { return this.tab === 'examStudents' }
-  },
+  }
 }
 </script>
 

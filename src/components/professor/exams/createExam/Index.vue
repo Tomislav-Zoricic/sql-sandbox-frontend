@@ -51,30 +51,30 @@ export default {
       console.log('STUP create exam')
     },
 
-    setActiveTab (tab) { this.tab = tab },
+    setActiveTab (tab) { this.tab = tab }
   },
 
   created () {
     // Questions and databases already in the store.
-    if (this.databases.length && this.questions.length) return;
+    if (this.databases.length && this.questions.length) return
 
     // Sets databases and questions in store.
     Promise.all([
       this.getDatabases(), this.getQuestions()
     ]).then(() => {
         // Case 1: No databases, break and redirect to creating databases.
-        if (!this.databases.length) {
-          console.log('No databases, redirect to database create page with warning')
-          return;
-        }
+      if (!this.databases.length) {
+        console.log('No databases, redirect to database create page with warning')
+        return
+      }
 
-        // Case 2: Set default database.
-        // NOTE Decide further on a way of setting default database.
-        const dbDefault = this.databases[0]
-        const dbQuestions = this.questions[dbDefault.id]
-        this.$store.commit('createExam/setDatabase', dbDefault)
-        this.$store.commit('createExam/setQuestions', dbQuestions)
-      })
+      // Case 2: Set default database.
+      // NOTE Decide further on a way of setting default database.
+      const dbDefault = this.databases[0]
+      const dbQuestions = this.questions[dbDefault.id]
+      this.$store.commit('createExam/setDatabase', dbDefault)
+      this.$store.commit('createExam/setQuestions', dbQuestions)
+    })
   }
 }
 </script>

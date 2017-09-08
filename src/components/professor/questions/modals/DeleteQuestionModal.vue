@@ -67,8 +67,8 @@ export default {
         .catch(error => {
           toastr.error(error, 'Something went wrong')
           this.toggle()
-        });
-      }
+        })
+    }
   }
 }
 </script>

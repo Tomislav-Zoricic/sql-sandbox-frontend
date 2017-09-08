@@ -65,7 +65,7 @@ export default {
     }),
 
     isIconsDisplay () {
-        return this.tab === 'iconsDisplay'
+      return this.tab === 'iconsDisplay'
     },
 
     filteredDatabases () {

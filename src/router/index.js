@@ -52,10 +52,10 @@ export default new Router({
         name: 'DatabasesList',
         component: DatabasesList
       },
-        {
-          path: 'create',
-          name: 'CreateDatabase',
-          component: CreateDatabase
+      {
+        path: 'create',
+        name: 'CreateDatabase',
+        component: CreateDatabase
       }]
     },
 
@@ -94,10 +94,10 @@ export default new Router({
         name: 'StudentsList',
         component: StudentsList
       },
-        {
-          path: 'create',
-          name: 'CreateStudent',
-          component: CreateStudent
+      {
+        path: 'create',
+        name: 'CreateStudent',
+        component: CreateStudent
       }]
     },
 
