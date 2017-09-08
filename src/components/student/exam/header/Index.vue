@@ -1,37 +1,46 @@
 <template lang="html">
-  <nav class="level">
-    <p class="level-item has-text-centered"
-      v-bind:class="{ 'has-notifications': hasNotifications }"
-       @click="showNotifications">
-      <a class="link is-info">
-        <span class="icon is-large"><i class="fa fa-bell-o"></i></span>
-      </a>
-    </p>
-    <p class="level-item has-text-centered">
-      <a class="link is-info">
-        {{student}}
-      </a>
-    </p>
-    <p class="level-item has-text-centered">
-      <a class="link is-info">
-        Results: {{questionsCorrect}} / {{questionsTotal}}
-      </a>
-    </p>
-    <p class="level-item has-text-centered">
-      <a class="link is-info">
-        Time left: {{timeLeft}}
-      </a>
-    </p>
-    <p class="level-item has-text-centered">
-      <a class="link is-info">
-        <a class="button is-primary">
-          <span class="icon">
-            <i class="fa fa-flag"></i>
+  <nav class="level is-mobile">
+    <div class="level-item has-text-centered is-clickable"
+      :class="{ 'has-notifications': hasNotifications }"
+      @click="showNotifications">
+      <div>
+        <p class="heading">Notifications</p>
+        <p class="title">
+          <span class="icon is-large" v-show="hasNotifications">
+            <i class="fa fa-bell-o"></i>
           </span>
-          <span>Finish</span>
-        </a>
-      </a>
-    </p>
+          <span class="icon is-large" v-show="!hasNotifications">
+            <i class="fa fa-bell-slash-o"></i>
+          </span>
+        </p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Student</p>
+        <p class="title">{{student}}</p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Results</p>
+        <p class="title">{{questionsCorrect}} / {{questionsTotal}}</p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Time left</p>
+        <p class="title">{{timeLeft}}</p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered is-clickable">
+      <div>
+        <p class="heading">Finish test</p>
+        <p class="title">
+          <span class="icon is-large"><i class="fa fa-flag-checkered"></i></span>
+        </p>
+      </div>
+    </div>
   </nav>
 </template>
 
@@ -39,7 +48,6 @@
 export default {
   data () {
     return {
-      testName: 'Default test name',
       student: 'Tomislav Zoricic',
       timeLeftSeconds: 2821,
       questionsTotal: 6,
@@ -72,8 +80,11 @@ export default {
 </script>
 
 <style lang="css">
+  .is-clickable {
+    cursor: pointer;
+  }
+
   .has-notifications {
-    background-color: red;
-    color: red;
+    /* NOTE Do something to make having notification more noticable */
   }
 </style>
