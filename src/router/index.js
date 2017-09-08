@@ -20,7 +20,9 @@ import ExamsList from '@/components/professor/exams/List'
 import Exam from '@/components/professor/exams/exam/Exam'
 import CreateExam from '@/components/professor/exams/createExam/Index'
 
-
+// NOTE There will be problems with name collisioning.
+import StudentDashboard from '@/components/student/dashboard/Index'
+import StudentExam from '@/components/student/exam/Index'
 
 Vue.use(Router)
 
@@ -99,6 +101,19 @@ export default new Router({
         name: 'CreateStudent',
         component: CreateStudent
       }]
+    },
+
+    // Student routes.
+    {
+      path: '/student',
+      name: 'StudentDashboard',
+      component: StudentDashboard
+    },
+
+    {
+      path: '/student/exam',
+      name: 'StudentExam',
+      component: StudentExam
     },
 
     {
