@@ -50,7 +50,7 @@ const mutations = {
 
   // Add after localhost:3000/question post
   selectQuestion (state, question) {
-    state.selectedQuestions[question.rank].push(question);
+    state.selectedQuestions[question.rank].push(question)
     state.questions = state.questions.filter(q  => q !== question)
   },
 
@@ -61,7 +61,7 @@ const mutations = {
   },
 
   addDatabase (state, payload) {
-    state.databases.push(payload);
+    state.databases.push(payload)
   },
 
   removeDatabase (state, id) {

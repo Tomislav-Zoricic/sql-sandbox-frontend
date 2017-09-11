@@ -33,7 +33,8 @@
         <p class="title">{{timeLeft}}</p>
       </div>
     </div>
-    <div class="level-item has-text-centered is-clickable">
+    <div class="level-item has-text-centered is-clickable"
+        @click="finishTest">
       <div>
         <p class="heading">Finish test</p>
         <p class="title">
@@ -74,6 +75,10 @@ export default {
   methods: {
     showNotifications () {
       console.log('Multiple notifications present, think about that case')
+    },
+
+    finishTest () {
+      console.log('STUP Finish test')
     }
   }
 }
