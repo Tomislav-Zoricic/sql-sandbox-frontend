@@ -25,7 +25,7 @@ const mutations = {
   },
 
   addQuestion (state, payload) {
-    state.questions[payload.database_id].push(payload);
+    state.questions[payload.database_id].push(payload)
   },
 
   // NOTE Still discusion whether removing/updating question
@@ -35,7 +35,7 @@ const mutations = {
   },
 
   addDatabase (state, payload) {
-    state.databases.push(payload);
+    state.databases.push(payload)
     state.questions[payload.id] = []
   },
 
@@ -102,7 +102,7 @@ const actions = {
 
 // statusText added for later use.
 function checkStatus(status, statusText) {
-  return status.toString() && status.toString().startsWith(2);
+  return status.toString() && status.toString().startsWith(2)
 }
 export default {
   namespaced: true,
