@@ -11,6 +11,7 @@ export default new Vuex.Store({
     databases,
     students,
     createExam,
-    exams
+    exams,
+    activeExam
   }
 })
