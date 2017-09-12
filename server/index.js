@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 
-const database = require('./shared/database');
+const database = require('./shared/database')
 
 database.initialize()
   .then(() => console.log('Database initialized'))
-  .catch(err => console.log('Error occurred', err));
+  .catch(err => console.log('Error occurred', err))

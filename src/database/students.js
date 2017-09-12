@@ -62,5 +62,5 @@ module.exports = [
     last_name: 'Zoricic',
     gender: 'male',
     academic_year: 2016
-  },
+  }
 ]

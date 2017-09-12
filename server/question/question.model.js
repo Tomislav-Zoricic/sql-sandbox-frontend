@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = function(sequelize, DataTypes) {
   const Question = sequelize.define('question', {
@@ -18,17 +18,17 @@ module.exports = function(sequelize, DataTypes) {
     paranoid: true,
     underscored: true,
     freezeTableName: true
-  });
+  })
 
   Question.associate = function (models) {
     Question.belongsTo(models.Database, {
       foreignKey: { unique: 'ux_question' }
-    });
+    })
     Question.belongsToMany(models.Exam, {
       through: models.ExamQuestion
-    });
-    Question.hasMany(models.Answer);
-  };
+    })
+    Question.hasMany(models.Answer)
+  }
 
-  return Question;
-};
+  return Question
+}

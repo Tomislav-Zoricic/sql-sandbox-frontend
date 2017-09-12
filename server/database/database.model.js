@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = function (sequelize, DataTypes) {
   const Database = sequelize.define('db_connection', {
@@ -6,12 +6,12 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       unique: { msg: 'The specified database name is already in use.' },
-      validate: { notEmpty: true },
+      validate: { notEmpty: true }
     },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: { notEmpty: true },
+      validate: { notEmpty: true }
     },
     password: {
       type: DataTypes.STRING,
@@ -22,14 +22,14 @@ module.exports = function (sequelize, DataTypes) {
     paranoid: true,
     underscored: true,
     freezeTableName: true
-  });
+  })
 
   Database.associate = function (models) {
-    Database.hasMany(models.Exam);
+    Database.hasMany(models.Exam)
     Database.hasMany(models.Question, {
       foreignKey: { unique: 'ux_question' }
-    });
-  };
+    })
+  }
 
-  return Database;
-};
+  return Database
+}

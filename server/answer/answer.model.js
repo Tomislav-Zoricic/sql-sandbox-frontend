@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = function (sequelize, DataTypes) {
   const Answer = sequelize.define('answer', {
@@ -10,13 +10,13 @@ module.exports = function (sequelize, DataTypes) {
     paranoid: true,
     underscored: true,
     freezeTableName: true
-  });
+  })
 
   Answer.associate = function (models) {
-    Answer.belongsTo(models.User);
-    Answer.belongsTo(models.Exam);
-    Answer.belongsTo(models.Question);
-  };
+    Answer.belongsTo(models.User)
+    Answer.belongsTo(models.Exam)
+    Answer.belongsTo(models.Question)
+  }
 
-  return Answer;
-};
+  return Answer
+}
