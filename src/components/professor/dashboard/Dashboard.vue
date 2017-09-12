@@ -20,14 +20,14 @@
       </div>
       <div class="column is-one-third">
         <list
-          title="Tests"
-          generalRoute="TestsList"
-          :items="tests"
-          detailRoute="Test"
-          :setName="testListEntry">
+          title="Exams"
+          generalRoute="ExamsList"
+          :items="exams"
+          detailRoute="Exam"
+          :setName="examListEntry">
         </list>
 
-        <grid-loader :loading="tests.length === 0">
+        <grid-loader :loading="exams.length === 0">
         </grid-loader>
       </div>
       <div class="column is-one-third">
@@ -67,19 +67,19 @@ export default {
   },
 
   methods: {
-    ...mapActions([
-      'getDatabases',
-      'getQuestions',
-      'getStudents',
-      'getTests'
-    ]),
+    ...mapActions({
+      getDatabases: 'databases/getDatabases',
+      getQuestions: 'databases/getQuestions',
+      'getStudents': 'students/getStudents',
+      'getExams': 'exams/getExams'
+    }),
 
     databaseListEntry (database) {
       return `${database.name}`
     },
 
-    testListEntry (test) {
-      return `Test date: ${test.date}`
+    examListEntry (exam) {
+      return `Exam date: ${exam.date}`
     },
 
     studentListEntry (student) {
@@ -88,11 +88,11 @@ export default {
   },
 
   computed: {
-    ...mapGetters([
-      'databases',
-      'students',
-      'tests'
-    ])
+    ...mapGetters({
+      databases: 'databases/databases',
+      students: 'students/students',
+      exams: 'exams/exams'
+    })
   },
 
   created () {
@@ -101,7 +101,7 @@ export default {
       this.getDatabases()
       this.getQuestions()
       this.getStudents()
-      this.getTests()
+      this.getExams()
     }, 3000)
   }
 

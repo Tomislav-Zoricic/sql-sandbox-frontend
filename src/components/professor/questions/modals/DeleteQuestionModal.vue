@@ -58,7 +58,7 @@ export default {
       axios.delete(deleteUrl)
         .then(() => {
           const db_id = this.$route.params.id
-          this.$store.commit('removeQuestion', { q_id, db_id })
+          this.$store.commit('databases/removeQuestion', { q_id, db_id })
 
           $deleteBtn.removeClass('is-loading')
           toastr.success('Question deleted', 'Successful')
@@ -67,8 +67,8 @@ export default {
         .catch(error => {
           toastr.error(error, 'Something went wrong')
           this.toggle()
-        });
-      }
+        })
+    }
   }
 }
 </script>

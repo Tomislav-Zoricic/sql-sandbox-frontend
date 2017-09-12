@@ -9,5 +9,10 @@ module.exports = {
           "impliedStrict": false,
           "jsx": false
       }
+    },
+    "rules": {
+       "indent": ["error", 2],
+       "comma-dangle": ["error", "never"],
+       "semi": [2, "never"]
     }
 };

@@ -7,7 +7,7 @@
         <h3 class="title is-3">Are yu sure you want to delete:</h3>
         <h4 class="title is-4">{{databaseName}}</h4>
         <p>All questions related to database will also be deleted,</p>
-        <p>including the tests containing this database.</p>
+        <p>including the exams containing this database.</p>
         <hr>
         <div class="field is-grouped has-centered-content">
           <p class="control">
@@ -77,7 +77,7 @@ export default {
         // .then(() => {
         //   axios.delete(deleteQuestionsUrl)
           .then(() => {
-            this.$store.commit('removeDatabase', id)
+            this.$store.commit('databases/removeDatabase', id)
 
             // $deleteBtn.removeClass('is-loading')
             toastr.success('Database deleted, alongside with its questions', 'Successful')
@@ -87,8 +87,8 @@ export default {
         .catch(error => {
           toastr.error(error, 'Something went wrong')
           this.toggle()
-        });
-      }
+        })
+    }
   }
 }
 </script>

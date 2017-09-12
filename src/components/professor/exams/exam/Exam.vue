@@ -6,21 +6,21 @@
           <div class="column">
             <div class="tabs is-centered is-large">
               <ul>
-                <li @click="tab='testDetails'"
+                <li @click="tab='examDetails'"
                   :class="{ 'is-active': isDetailsTab }">
                   <a>
                     <span class="icon is-small"><i class="fa fa-info-circle"></i></span>
                     <span>Details</span>
                   </a>
                 </li>
-                <li @click="tab='testQuestions'"
+                <li @click="tab='examQuestions'"
                   :class="{ 'is-active': isQuestionsTab }">
                   <a>
                     <span class="icon is-small"><i class="fa fa-question-circle"></i></span>
                     <span>Questions</span>
                   </a>
                 </li>
-                <li @click="tab='testStudents'"
+                <li @click="tab='examStudents'"
                   :class="{ 'is-active': isStudentsTab }">
                   <a>
                     <span class="icon is-small"><i class="fa fa-users"></i></span>
@@ -37,7 +37,7 @@
       </div>
     </template>
 
-    individual test details {{this.$route.params.id}}
+    individual exam details {{this.$route.params.id}}
   </div>
 </template>
 
@@ -49,22 +49,22 @@ import Students from './Students'
 export default {
   data () {
     return {
-      tab: 'testDetails',
+      tab: 'examDetails',
       selectedQuestions: []
     }
   },
 
   components: {
-    'testQuestions': Questions,
-    'testStudents': Students,
-    'testDetails': Details
+    'examQuestions': Questions,
+    'examStudents': Students,
+    'examDetails': Details
   },
 
   computed: {
-    isDetailsTab () { return this.tab === 'testDetails' },
-    isQuestionsTab () { return this.tab === 'testQuestions' },
-    isStudentsTab () { return this.tab === 'testStudents' }
-  },
+    isDetailsTab () { return this.tab === 'examDetails' },
+    isQuestionsTab () { return this.tab === 'examQuestions' },
+    isStudentsTab () { return this.tab === 'examStudents' }
+  }
 }
 </script>
 

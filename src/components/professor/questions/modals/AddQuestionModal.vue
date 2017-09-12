@@ -54,9 +54,9 @@
 
       <footer class="modal-card-foot">
         <a class="button is-success"
-           @click="addQuestion"
-           :disabled="!this.question || !this.answer ? true : false"
-           ref="addQuestionButton">
+           @click="createQuestion"
+           :class="{ 'is-loading': isCreatingQuestion }"
+           :disabled="!this.question || !this.answer ? true : false">
             Add
         </a>
         <a class="button"
@@ -68,6 +68,7 @@
 
 <script>
 import $ from 'jquery'
+import { mapActions } from 'vuex'
 import axios from 'axios'
 import toastr from 'toastr'
 
@@ -96,28 +97,30 @@ export default {
     return {
       question: '',
       answer: '',
-      rank: 'easy'
+      rank: 'easy',
+      isCreatingQuestion: false
     }
   },
 
   methods: {
-    addQuestion () {
+    ...mapActions({
+      newQuestion: 'databases/createQuestion'
+    }),
+
+    createQuestion () {
       if (!this.validateData()) return
+      this.isCreatingQuestion = true
 
-      // NOTE Validate question adding.
-      const $addBtn = $(this.$refs.addQuestionButton)
-      $addBtn.addClass('is-loading')
+      const questionPayload = {
+        question: this.question,
+        answer: this.answer,
+        rank: this.rank,
+        'database_id': this.databaseId
+      }
 
-      axios.post('http://localhost:3000/questions', {
-          question: this.question,
-          answer: this.answer,
-          rank: this.rank,
-          'database_id': this.databaseId
-        })
-        .then(({ data: question }) => {
-          this.$store.commit('addQuestion', question)
-
-          $addBtn.removeClass('is-loading')
+      this.newQuestion(questionPayload)
+        .then(question => {
+          this.isCreatingQuestion = false
           toastr.success('Question created', 'Successful')
           this.toggle()
 
@@ -128,13 +131,14 @@ export default {
         .catch(error => {
           toastr.error(error, 'Something went wrong')
           this.toggle()
-        });
+        })
     },
 
     validateData () {
       // NOTE Can do some better validation than this one.
+      const messageSubtitle = 'Check your form, quesiton or answer might be missing'
       if (!this.question || !this.answer) {
-        toastr.error('Check your form, quesiton or answer might be missing', 'Something went wrong')
+        toastr.error(messageSubtitle, 'Something went wrong')
         return false
       }
       return true

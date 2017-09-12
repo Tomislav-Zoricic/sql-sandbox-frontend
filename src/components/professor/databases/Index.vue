@@ -35,10 +35,10 @@ export default {
   },
 
   methods: {
-    ...mapActions([
-      'getDatabases',
-      'getQuestions'
-    ]),
+    ...mapActions({
+      getDatabases: 'databases/getDatabases',
+      getQuestions: 'databases/getQuestions'
+    }),
 
     setInfo (title, subtitle) {
       this.title = title

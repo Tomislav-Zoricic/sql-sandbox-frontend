@@ -6,7 +6,7 @@
       <component
         :is="tab"
         :database="database"
-        :questions="questions"
+        :questions="databaseQuestions"
         :setDataValidation="setDataValidation">
       </component>
     </div>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 import Tabs from './Tabs'
 import List from './../../common/List'
 import Details from './Details'
@@ -54,25 +54,28 @@ export default {
   },
 
   computed: {
+    ...mapGetters({
+      databases: 'databases/databases',
+      questions: 'databases/questions'
+    }),
+
     isDetailsTab () { return this.tab === 'databaseDetails' },
     isQuestionsTab () { return this.tab === 'databaseQuestions' },
     isStatsTab () { return this.tab === 'databaseStats' },
     isOptionsTab () { return this.tab === 'databaseOptions' },
     database () {
-      const databases = this.$store.getters.databases
       const id = parseInt(this.$route.params.id, 10)
-
-      if (databases.length) {
-        const database = databases.filter(db => db.id === id)[0]
+      if (this.databases.length) {
+        // Check whether exists?
+        const database = this.databases.filter(db => db.id === id)[0]
         return database
       }
       // Database not found.
       return { name: 'Database' }
     },
-    questions () {
-      const questions = this.$store.getters.questions
+    databaseQuestions () {
       const id = parseInt(this.$route.params.id, 10)
-      return questions[id] ? questions[id] : []
+      return this.questions[id] ? this.questions[id] : []
     }
   },
 
@@ -91,12 +94,6 @@ export default {
     this.tab = 'databaseDetails'
 
     next()
-  },
-
-  watch: {
-    '$route' (to, from) {
-      this.databaseId = to.params.id
-    }
   },
 
   mounted() {

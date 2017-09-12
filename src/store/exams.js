@@ -3,30 +3,29 @@ import toastr from 'toastr'
 import { API_URL, STATUS_OK } from './../../config/dev.env.js'
 
 const state = {
-  students: []
+  exams: []
 }
 const getters = {
-  students: state => state.students
-
-}
-
-const mutations = {
-  setStudents (state, payload) {
-    state.students = payload
-  }
+  exams: state => state.exams
 }
 
 const actions = {
-  getStudents (context) {
-    axios.get(`${API_URL}/students`)
+  getExams (context) {
+    axios.get(`${API_URL}/exams`)
       .then(({ status, statusText, data }) => {
         if (status === STATUS_OK) {
-          toastr.success('Retrieving students', 'Successful')
-          context.commit('setStudents', data)
+          toastr.success('Retrieving exams', 'Successful')
+          context.commit('setExams', data)
         } else {
-          toastr.error('Retrieving students', 'Something went wrong')
+          toastr.error('Retrieving exams', 'Something went wrong')
         }
       })
+  }
+}
+
+const mutations = {
+  setExams (state, payload) {
+    state.exams = payload
   }
 }
 

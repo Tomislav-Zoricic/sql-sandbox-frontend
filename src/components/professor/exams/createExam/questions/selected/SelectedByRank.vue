@@ -8,7 +8,7 @@
           <div class="level-item has-text-centered">
             <div>
               <p class="heading">Rank</p>
-              <p class="title">{{uppercaseFirstLetter(rank)}}</p>
+              <p class="title">{{(rank)}}</p>
             </div>
           </div>
           <div class="level-item has-text-centered">
@@ -20,7 +20,7 @@
           <div class="level-item has-text-centered">
             <div>
               <p class="heading">Out of</p>
-              <p class="title">{{numberOfQuestions}}</p>
+              <p class="title">{{noOfQuestions}}</p>
             </div>
           </div>
         </nav>
@@ -29,9 +29,10 @@
 
         <table class="table is-striped">
           <tbody>
-            <tr v-for="q in questions"
-                @click="unselectQuestion(q)">
-              <td>{{q.question}}</td>
+            <tr v-for="question in questions">
+              <td class="table-item" @click="deselectQuestion(question)">
+                {{question.question}}
+              </td>
             </tr>
           </tbody>
         </table>
@@ -42,44 +43,31 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   props: {
-    rank: {
-      type: String
-    },
-
-    numberOfQuestions: {
-      type: Number,
-      default: 3
-    },
-
+    rank: String,
     questions: {
       type: Array,
       default () { return [] }
     },
-
-    unselectQuestion: {
-      type: Function
-    }
-  },
-
-  computed: {
-    rankQuestions () {
-      console.log('rank questions', Array.from(this.questions))
-      return Array.from(this.questions).filter(q => q.rank === this.rank)
+    noOfQuestions: {
+      type: Number,
+      default () { return 0 }
     }
   },
 
   methods: {
-    uppercaseFirstLetter (str) {
-      return str.charAt(0).toUpperCase() + str.slice(1);
+    deselectQuestion (question) {
+      this.$store.commit('createExam/deselectQuestion', question)
     }
   }
 }
 </script>
 
 <style lang="css" scoped>
-  tr {
+  .table-item {
     cursor: pointer;
   }
 </style>

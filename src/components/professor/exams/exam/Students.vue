@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="">
-    student tests
+    inspect exam students
   </div>
 </template>
 
