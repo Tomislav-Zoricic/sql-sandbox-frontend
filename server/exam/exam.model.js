@@ -9,11 +9,13 @@ module.exports = function (sequelize, DataTypes) {
     },
     startTime: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: false,
+      field: 'start_time'
     },
     endTime: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: false,
+      field: 'end_time'
     }
   }, {
     paranoid: true,
@@ -23,16 +25,17 @@ module.exports = function (sequelize, DataTypes) {
 
   Exam.associate = function (models) {
     Exam.belongsTo(models.User, {
-      foreignKey: 'professorId'
+      foreignKey: { name: 'professorId', field: 'professor_id' }
     });
     Exam.belongsToMany(models.User, {
       through: models.StudentExam,
-      foreignKey: 'examId'
+      foreignKey: { name: 'examId', field: 'exam_id' }
     });
     Exam.belongsTo(models.Database);
     Exam.belongsToMany(models.Question, {
       through: models.ExamQuestion
     });
+    Exam.hasMany(models.Answer);
   };
 
   return Exam;

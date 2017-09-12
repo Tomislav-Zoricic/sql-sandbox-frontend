@@ -3,10 +3,12 @@
 module.exports = function (sequelize, DataTypes) {
   const User = sequelize.define('user', {
     firstName: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      field: 'first_name'
     },
     lastName: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      field: 'last_name'
     },
     email: {
       type: DataTypes.STRING,
@@ -31,12 +33,13 @@ module.exports = function (sequelize, DataTypes) {
 
   User.associate = function (models) {
     User.hasMany(models.Exam, {
-      foreignKey: 'professorId'
+      foreignKey: { name: 'professorId', field: 'professor_id' }
     });
     User.belongsToMany(models.Exam, {
       through: models.StudentExam,
-      foreignKey: 'studentId'
+      foreignKey: { name: 'studentId', field: 'student_id' }
     });
+    User.hasMany(models.Answer);
   };
 
   return User;

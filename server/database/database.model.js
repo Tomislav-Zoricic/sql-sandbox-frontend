@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function (sequelize, DataTypes) {
-  const Database = sequelize.define('database', {
+  const Database = sequelize.define('db_connection', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -26,7 +26,9 @@ module.exports = function (sequelize, DataTypes) {
 
   Database.associate = function (models) {
     Database.hasMany(models.Exam);
-    Database.hasMany(models.Question);
+    Database.hasMany(models.Question, {
+      foreignKey: { unique: 'ux_question' }
+    });
   };
 
   return Database;

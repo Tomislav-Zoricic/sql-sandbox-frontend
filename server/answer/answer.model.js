@@ -3,7 +3,8 @@
 module.exports = function (sequelize, DataTypes) {
   const Answer = sequelize.define('answer', {
     givenQuery: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      field: 'given_query'
     }
   }, {
     paranoid: true,
@@ -12,8 +13,9 @@ module.exports = function (sequelize, DataTypes) {
   });
 
   Answer.associate = function (models) {
-    Answer.belongsTo(models.StudentExam);
-    Answer.belongsTo(models.ExamQuestion);
+    Answer.belongsTo(models.User);
+    Answer.belongsTo(models.Exam);
+    Answer.belongsTo(models.Question);
   };
 
   return Answer;

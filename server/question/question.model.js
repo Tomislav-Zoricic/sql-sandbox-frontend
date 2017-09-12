@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
     correctQuery: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: 'ux_question',
+      field: 'correct_query',
       validate: { notEmpty: true }
     }
   }, {
@@ -21,10 +21,13 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Question.associate = function (models) {
-    Question.belongsTo(models.Database);
+    Question.belongsTo(models.Database, {
+      foreignKey: { unique: 'ux_question' }
+    });
     Question.belongsToMany(models.Exam, {
       through: models.ExamQuestion
     });
+    Question.hasMany(models.Answer);
   };
 
   return Question;
