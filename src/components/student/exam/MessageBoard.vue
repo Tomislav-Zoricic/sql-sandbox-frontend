@@ -1,16 +1,13 @@
 <template lang="html">
-  <section class="hero is-primary">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title">
-        Message Board
-      </h1>
-      <h2 class="subtitle">
-        Here will print professor notifications, diagram description
-      </h2>
+  <article class="message is-primary is-large">
+    <div class="message-header">
+      <p>Message board</p>
+      <button class="delete" aria-label="delete"></button>
     </div>
-  </div>
-</section>
+    <div class="message-body">
+      Here will be set professor notifications
+    </div>
+  </article>
 </template>
 
 <script>

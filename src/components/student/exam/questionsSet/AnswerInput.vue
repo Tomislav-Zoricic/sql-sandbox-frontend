@@ -2,7 +2,7 @@
   <div class="">
     <div class="field">
       <div class="control">
-        <textarea class="textarea" placeholder="Textarea"></textarea>
+        <textarea class="textarea" v-model="answer"></textarea>
       </div>
     </div>
   </div>
@@ -12,7 +12,7 @@
 export default {
   data () {
     return {
-      message: ''
+      answer: ''
     }
   }
 }

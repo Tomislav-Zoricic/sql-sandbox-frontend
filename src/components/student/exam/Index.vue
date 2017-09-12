@@ -20,7 +20,7 @@
 </template>
 
 <script>
-
+import { mapActions } from 'vuex'
 import QuestionsSet from './questionsSet/Index'
 import ResultSet from './ResultSet'
 import Header from './header/Index'
@@ -45,9 +45,17 @@ export default {
   },
 
   methods: {
+    ...mapActions({
+      getExam: 'activeExam/getExam'
+    }),
+
     changeTab (tab) {
       this.tab = tab
     }
+  },
+
+  created () {
+    this.getExam()
   }
 }
 </script>
