@@ -20,6 +20,8 @@ import ExamsList from '@/components/professor/exams/List'
 import Exam from '@/components/professor/exams/exam/Exam'
 import CreateExam from '@/components/professor/exams/createExam/Index'
 
+import ActiveExamIndex from '@/components/professor/activeExam/Index'
+
 // NOTE There will be problems with name collisioning.
 import StudentDashboard from '@/components/student/dashboard/Index'
 import StudentExam from '@/components/student/exam/Index'
@@ -79,6 +81,11 @@ export default new Router({
         path: 'create',
         name: 'CreateExam',
         component: CreateExam
+      },
+      {
+        path: 'active',
+        name: 'ActiveExamIndex',
+        component: ActiveExamIndex
       }]
     },
 
