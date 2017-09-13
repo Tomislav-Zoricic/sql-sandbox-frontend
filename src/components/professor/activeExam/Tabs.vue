@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="tabs is-large">
+  <div class="tabs is-large is-centered">
     <ul>
       <li @click="setActiveTab('active-exam-details')"
         :class="{ 'is-active': isDetailsTab }">
@@ -54,5 +54,8 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
+  .is-centered {
+    justify-content: center !important;
+  }
 </style>
