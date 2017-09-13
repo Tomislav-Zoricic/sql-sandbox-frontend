@@ -22,12 +22,14 @@
         </div>
         <div class="column is-one-half">
           <h1 class="title">History</h1>
-          <div v-for="n in notifications" class="box">
-            <p>
-              <strong>{{n.timestamp}}</strong>
-              <br>
-              {{n.text}}
-            </p>
+          <div class="notifications-container">
+            <div v-for="n in notifications" class="box">
+              <p>
+                <strong>{{n.timestamp}}</strong>
+                <br>
+                {{n.text}}
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -39,7 +41,7 @@ import faker from 'faker'
 export default {
   computed: {
     notifications () {
-      return [...Array(7)].map(() => {
+      return [...Array(27)].map(() => {
         return {
           timestamp: faker.date.recent(),
           text: faker.lorem.sentences()
@@ -53,5 +55,11 @@ export default {
 <style lang="css" scoped>
   .is-stretched {
     display: flex;
+  }
+
+  .notifications-container {
+    max-height: 100vh;
+    overflow: auto;
+    border: 1px solid;
   }
 </style>
