@@ -36,22 +36,14 @@
           </div>
         </div>
       </div>
-      <div class="columns">
+      <div class="columns" v-show="this.resultSet.length">
         <div class="column">
           <table class="table">
             <thead>
-              <th>id</th>
-              <th>name</th>
-              <th>engine</th>
-              <th>speed</th>
-              <th>miles</th>
+              <th v-for="column in columns">{{column}}</th>
             </thead>
-            <tr v-for="i in 10">
-              <td>{{i}}</td>
-              <td>{{carsName[Math.round(Math.random()*3) + 0]}}</td>
-              <td>{{carsEngine[Math.round(Math.random()*2) + 0]}}</td>
-              <td>{{carsSpeed[Math.round(Math.random()*3) + 0]}}</td>
-              <td>{{carsMiles[Math.round(Math.random()*3) + 0]}}</td>
+            <tr v-for="result in resultSet">
+              <td v-for="feature in result">{{feature}}</td>
             </tr>
           </table>
         </div>
@@ -70,12 +62,51 @@ export default {
     return {
       // NOTE Put load animation if answer isn't received yet.
       isWorking: false,
-      carsName: ['ford', 'mazda', 'suzuki', 'yugo'],
-      carsEngine: ['127-kilowatt electric motor', '100-kW Fuel Cell', '2.0-liter Turbocharged H-4'],
-      carsSpeed: [210, 315, 185, 200],
-      carsMiles: [150000, 23000, 54440, 1000000],
+      resultSet: [
+        {
+          id: 1,
+          name: 'ford',
+          engine: '127-kilowatt electric motor',
+          speed: 180,
+          miles: 1000000
+        },
+        {
+          id: 2,
+          name: 'mazda',
+          engine: '2.0-liter Turbocharged H-4',
+          speed: 220,
+          miles: 235000
+        },
+        {
+          id: 3,
+          name: 'suzuki',
+          engine: '100-kW Fuel Cell',
+          speed: 210,
+          miles: 150000
+        },
+        {
+          id: 4,
+          name: 'yugo',
+          engine: '127-kilowatt electric motor',
+          speed: 150,
+          miles: 23000
+        },
+        {
+          id: 5,
+          name: 'volvo',
+          engine: '100-kW Fuel Cell',
+          speed: 315,
+          miles: 150000
+        }
+      ],
       score: 94.6,
       answer: 'Select * from cars where date_created >= 2017-01-01 and kilometres > 100000'
+    }
+  },
+
+  computed: {
+    columns () {
+      return this.resultSet.length ? Object.keys(this.resultSet[0]) : []
     }
   }
 }

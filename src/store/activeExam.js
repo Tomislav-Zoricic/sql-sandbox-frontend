@@ -36,7 +36,6 @@ const getters = {
 
 const mutations = {
   setExam (state, payload) {
-    console.log('SETTING EXAM', payload)
     state.name = payload.name
     state.duration = payload.duration
     state.database = payload.databaseId

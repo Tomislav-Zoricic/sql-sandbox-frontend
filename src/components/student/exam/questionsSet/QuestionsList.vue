@@ -25,19 +25,17 @@ export default {
 
   data () {
     return {
-      question: 1
+      activeQuestion: -1
     }
   },
 
   methods: {
     selectQuestion ({ target }) {
-      console.log(target.id)
-      this.question = parseInt(target.id)
+      this.activeQuestion = parseInt(target.id)
     },
 
     isActive(question) {
-      console.log('qqq', this.question, question)
-      return this.question === parseInt(question)
+      return this.activeQuestion === parseInt(question)
     }
   }
 }
