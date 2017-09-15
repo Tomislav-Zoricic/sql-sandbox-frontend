@@ -1,4 +1,4 @@
-createExam/<template lang="html">
+<template lang="html">
   <div class="field is-horizontal">
     <div class="field-label is-normal">
       <label class="label">{{rank}}</label>
