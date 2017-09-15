@@ -2,20 +2,35 @@
 
 module.exports = function (sequelize, DataTypes) {
   const Exam = sequelize.define('exam', {
-    password: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: { notEmpty: true, len: [5, 20] }
+      unique: { msg: 'The specified exam name is already in use.' },
+      validate: { notEmpty: true }
     },
-    startTime: {
-      type: DataTypes.DATE,
+    academicYear: {
+      type: DataTypes.INTEGER,
       allowNull: false,
-      field: 'start_time'
+      field: 'academic_year'
     },
-    endTime: {
-      type: DataTypes.DATE,
+    duration: {
+      type: DataTypes.INTEGER,  // in mins
+      allowNull: false
+    },
+    easyPoints: {
+      type: DataTypes.INTEGER,
       allowNull: false,
-      field: 'end_time'
+      field: 'easy_points'
+    },
+    mediumPoints: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      field: 'medium_points'
+    },
+    hardPoints: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      field: 'hard_points'
     }
   }, {
     paranoid: true,
@@ -27,15 +42,13 @@ module.exports = function (sequelize, DataTypes) {
     Exam.belongsTo(models.User, {
       foreignKey: { name: 'professorId', field: 'professor_id' }
     })
-    Exam.belongsToMany(models.User, {
-      through: models.StudentExam,
-      foreignKey: { name: 'examId', field: 'exam_id' }
+    Exam.hasMany(models.ExamTaken, {
+      foreignKey: { unique: 'ux_exam_taken' }
     })
-    Exam.belongsTo(models.Database)
+    Exam.belongsTo(models.DbConnection)
     Exam.belongsToMany(models.Question, {
       through: models.ExamQuestion
     })
-    Exam.hasMany(models.Answer)
   }
 
   return Exam

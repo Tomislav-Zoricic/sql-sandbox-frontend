@@ -13,6 +13,10 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       field: 'correct_query',
       validate: { notEmpty: true }
+    },
+    difficulty: {
+      type: DataTypes.ENUM('EASY', 'MEDIUM', 'HARD'),
+      defaultValue: 'EASY'
     }
   }, {
     paranoid: true,
@@ -21,11 +25,14 @@ module.exports = function(sequelize, DataTypes) {
   })
 
   Question.associate = function (models) {
-    Question.belongsTo(models.Database, {
+    Question.belongsTo(models.DbConnection, {
       foreignKey: { unique: 'ux_question' }
     })
     Question.belongsToMany(models.Exam, {
       through: models.ExamQuestion
+    })
+    Question.belongsToMany(models.ExamTaken, {
+      through: models.ExamTakenQuestion
     })
     Question.hasMany(models.Answer)
   }

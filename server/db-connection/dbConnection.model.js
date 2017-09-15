@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = function (sequelize, DataTypes) {
-  const Database = sequelize.define('db_connection', {
+  const DbConnection = sequelize.define('db_connection', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -17,6 +17,14 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       validate: { notEmpty: true, len: [5, 20] }
+    },
+    host: {
+      type: DataTypes.STRING,
+      defaultValue: process.env.SERVER_HOST
+    },
+    port: {
+      type: DataTypes.INTEGER,
+      defaultValue: 3306  // default MySQL port
     }
   }, {
     paranoid: true,
@@ -24,12 +32,12 @@ module.exports = function (sequelize, DataTypes) {
     freezeTableName: true
   })
 
-  Database.associate = function (models) {
-    Database.hasMany(models.Exam)
-    Database.hasMany(models.Question, {
+  DbConnection.associate = function (models) {
+    DbConnection.hasMany(models.Exam)
+    DbConnection.hasMany(models.Question, {
       foreignKey: { unique: 'ux_question' }
     })
   }
 
-  return Database
+  return DbConnection
 }

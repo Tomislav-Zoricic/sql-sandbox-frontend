@@ -5,6 +5,10 @@ module.exports = function (sequelize, DataTypes) {
     givenQuery: {
       type: DataTypes.STRING,
       field: 'given_query'
+    },
+    correct: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   }, {
     paranoid: true,
@@ -13,8 +17,10 @@ module.exports = function (sequelize, DataTypes) {
   })
 
   Answer.associate = function (models) {
-    Answer.belongsTo(models.User)
-    Answer.belongsTo(models.Exam)
+    Answer.belongsTo(models.User, {
+      foreignKey: { name: 'studentId', field: 'student_id' }
+    })
+    Answer.belongsTo(models.ExamTaken)
     Answer.belongsTo(models.Question)
   }
 

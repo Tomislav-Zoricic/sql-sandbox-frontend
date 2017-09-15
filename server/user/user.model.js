@@ -35,11 +35,16 @@ module.exports = function (sequelize, DataTypes) {
     User.hasMany(models.Exam, {
       foreignKey: { name: 'professorId', field: 'professor_id' }
     })
-    User.belongsToMany(models.Exam, {
-      through: models.StudentExam,
+    User.hasMany(models.ExamTaken, {
+      foreignKey: {
+        name: 'studentId',
+        field: 'student_id',
+        unique: 'ux_exam_taken'
+      }
+    })
+    User.hasMany(models.Answer, {
       foreignKey: { name: 'studentId', field: 'student_id' }
     })
-    User.hasMany(models.Answer)
   }
 
   return User

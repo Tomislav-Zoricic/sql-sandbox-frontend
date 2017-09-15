@@ -8,11 +8,12 @@ const sequelize = new Sequelize(process.env.POSTGRES_URI)
 
 let models = {
   Answer: '../../answer/answer.model',
-  Database: '../../database/database.model',
+  DbConnection: '../../db-connection/dbConnection.model',
   Exam: '../../exam/exam.model',
   ExamQuestion: '../../exam-question/examQuestion.model',
+  ExamTaken: '../../exam-taken/examTaken.model',
+  ExamTakenQuestion: '../../exam-taken-question/examTakenQuestion.model',
   Question: '../../question/question.model',
-  StudentExam: '../../student-exam/studentExam.model',
   User: '../../user/user.model'
 }
 
