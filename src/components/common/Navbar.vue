@@ -25,13 +25,20 @@
       </div>
 
       <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">Exams</a>
+        <a class="navbar-link">
+          <span class="icon is-medium"><i class="fa fa-exclamation-circle"></i></span>
+          <span> Exams</span>
+        </a>
+
         <div class="navbar-dropdown ">
           <router-link class="navbar-item" :to="{ name: 'ExamsList' }">
             Exams
           </router-link>
           <router-link class="navbar-item" :to="{ name: 'CreateExam' }">
             Create Exam
+          </router-link>
+          <router-link class="navbar-item" :to="{ name: 'ActiveExamIndex' }">
+            <strong>Active Exam</strong>
           </router-link>
         </div>
       </div>
@@ -81,5 +88,8 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
+  .icon .fa-exclamation-circle {
+    color: red;
+  }
 </style>
