@@ -40,6 +40,14 @@
         <no-of-questions rank="hard"></no-of-questions>
       </div>
 
+      <div class="box">
+        <h1 class="title">Rank values</h1>
+        <h2 class="subtitle">Set the value for each question rank</h2>
+        <rank-value rank="easy"></rank-value>
+        <rank-value rank="medium"></rank-value>
+        <rank-value rank="hard"></rank-value>
+      </div>
+
     </div>
   </div>
 </template>
@@ -47,9 +55,12 @@
 <script>
 import moment from 'moment'
 import NoOfQuestions from './NoOfQuestions'
+import RankValue from'./RankValue'
+
 export default {
   components: {
-    'no-of-questions': NoOfQuestions
+    'no-of-questions': NoOfQuestions,
+    'rank-value': RankValue
   },
 
   data () {

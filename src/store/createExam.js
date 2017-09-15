@@ -6,6 +6,10 @@ const DATE_DEFAULT = moment().format("YYYY-MM-DD")
 const DURATION_DEFAULT = 60
 const DEFAULT_DATABASE = { name: 'Default Database Name'}
 
+const DEFAULT_RANK_VALUE_EASY = 1
+const DEFAULT_RANK_VALUE_MEDIUM = 3
+const DEFAULT_RANK_VALUE_HARD = 5
+
 const state = {
   name: EXAM_NAME_DEFAULT,
   date: DATE_DEFAULT,
@@ -22,6 +26,11 @@ const state = {
     'easy': [],
     'medium': [],
     'hard': []
+  },
+  rankValues: {
+    'easy': DEFAULT_RANK_VALUE_EASY,
+    'medium': DEFAULT_RANK_VALUE_MEDIUM,
+    'hard': DEFAULT_RANK_VALUE_HARD
   }
 }
 
@@ -32,6 +41,7 @@ const getters = {
   database: state => state.database,
   questions: state => state.questions,
   noOfQuestions: state => state.noOfQuestions,
+  rankValues: state => state.rankValues,
   selectedQuestions: state => state.selectedQuestions
 }
 
@@ -46,6 +56,10 @@ const mutations = {
 
   changeQuestionsNumber(state, { rank, value }) {
     state.noOfQuestions[rank] = value
+  },
+
+  changeRankValue(state, { rank, value }) {
+    state.rankValues[rank] = value
   },
 
   // Add after localhost:3000/question post
