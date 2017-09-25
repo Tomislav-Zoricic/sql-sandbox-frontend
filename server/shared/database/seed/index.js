@@ -11,11 +11,13 @@ const questionData = require('./questions.json').data
 const DIFFICULTY = ['EASY', 'MEDIUM', 'HARD']
 
 function insertAnswers(Answer, examsTaken) {
-  Promise.map(examsTaken, examTaken => {
-    examTaken.getStudent().then(student => {
-      examTaken.getQuestions().then(questions => {
-        Promise.map(questions, question => {
-          Answer.create({ givenQuery: question.correctQuery, correct: true })
+  return Promise.map(examsTaken, examTaken => {
+    return examTaken.getStudent().then(student => {
+      return examTaken.getQuestions().then(questions => {
+        return Promise.map(questions, question => {
+          return Answer.create({
+            givenQuery: question.correctQuery, correct: true
+          })
             .then(answer => answer.setStudent(student))
             .then(answer => answer.setExam_taken(examTaken))
             .then(answer => answer.setQuestion(question))
@@ -104,7 +106,8 @@ function populateDatabase(db) {
   })
     .then(result => {
       return insertQuestions(Question, result.exams, result.dbConnections)
-        .then(() => pick(result, ['students', 'exams'])) })
+        .then(() => pick(result, ['students', 'exams']))
+    })
     .then(result => insertTakenExams(ExamTaken, result.exams, result.students))
     .then(examsTaken => insertAnswers(Answer, examsTaken))
 }
