@@ -16,6 +16,7 @@ module.exports = function (sequelize, DataTypes) {
       foreignKey: { unique: 'ux_exam_taken' }
     })
     ExamTaken.belongsTo(models.User, {
+      as: 'student',
       foreignKey: {
         name: 'studentId',
         field: 'student_id',

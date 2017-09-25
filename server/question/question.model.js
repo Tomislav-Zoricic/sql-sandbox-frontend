@@ -13,10 +13,6 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       field: 'correct_query',
       validate: { notEmpty: true }
-    },
-    difficulty: {
-      type: DataTypes.ENUM('EASY', 'MEDIUM', 'HARD'),
-      defaultValue: 'EASY'
     }
   }, {
     paranoid: true,

@@ -40,6 +40,7 @@ module.exports = function (sequelize, DataTypes) {
 
   Exam.associate = function (models) {
     Exam.belongsTo(models.User, {
+      as: 'professor',
       foreignKey: { name: 'professorId', field: 'professor_id' }
     })
     Exam.hasMany(models.ExamTaken, {
