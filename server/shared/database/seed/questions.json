@@ -1,0 +1,12 @@
+{
+  "data": [{
+    "content": "Drop the Customer table",
+    "correctQuery": "DROP TABLE customer"
+  }, {
+    "content": "Select all from car_model table",
+    "correctQuery": "SELECT * FROM car_model"
+  }, {
+    "content": "Update name column to Fiat on car_model table where subtype=Punto",
+    "correctQuery": "UPDATE car_model SET name='Fiat' WHERE subtype='Punto'"
+  }]
+}
