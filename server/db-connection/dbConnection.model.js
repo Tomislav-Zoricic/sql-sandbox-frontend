@@ -5,7 +5,7 @@ module.exports = function (sequelize, DataTypes) {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: { msg: 'The specified database name is already in use.' },
+      unique: { msg: 'The specified DB connection name is already in use.' },
       validate: { notEmpty: true }
     },
     username: {
