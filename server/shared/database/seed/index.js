@@ -12,8 +12,8 @@ const DIFFICULTY = ['EASY', 'MEDIUM', 'HARD']
 
 function insertAnswers(Answer, examsTaken) {
   return Promise.map(examsTaken, examTaken => {
-    return examTaken.getStudent().then(student => {
-      return examTaken.getQuestions().then(questions => {
+    return Promise.join(examTaken.getStudent(), examTaken.getQuestions(),
+      (student, questions) => {
         return Promise.map(questions, question => {
           return Answer.create({
             givenQuery: question.correctQuery, correct: true
@@ -24,7 +24,6 @@ function insertAnswers(Answer, examsTaken) {
             .then(() => examTaken.update({ score: 100 }))
         })
       })
-    })
   })
 }
 
@@ -49,48 +48,36 @@ function insertTakenExams(ExamTaken, exams, students) {
   return Promise.all(result)
 }
 
-function insertQuestions(Question, exams, dbConnections) {
-  const result = []
+function insertQuestions(Question, exams) {
   let examsLen = exams.length
 
-  questionData.forEach((record, index) => {
-    result.push(
-      Question.create(record)
-        .then(question => {
-          let exam = exams[index % examsLen]
-          return question.addExam(exam, {
-            through: { difficulty: DIFFICULTY[index] }
-          })
-            .then(() => exam.getDb_connection())
-            .then(dbConn => question.setDb_connection(dbConn))
-            .catch(() => question.destroy({ force: true }))
+  return Promise.map(questionData, (record, index) => {
+    return Question.create(record)
+      .then(question => {
+        let exam = exams[index % examsLen]
+        return question.addExam(exam, {
+          through: { difficulty: DIFFICULTY[index] }
         })
-    )
+          .then(() => exam.getDb_connection())
+          .then(dbConn => question.setDb_connection(dbConn))
+          .catch(() => question.destroy({ force: true }))
+      })
   })
-
-  return Promise.all(result)
 }
 
 function insertExams(Exam, professors, dbConnections) {
-  const result = []
   let profLen = professors.length
   let dbConLen = dbConnections.length
 
-  examData.forEach((record, index) => {
-    result.push(
-      Exam.create(record)
-        .then(exam => exam.setProfessor(professors[index % profLen]))
-        .then(exam => exam.setDb_connection(dbConnections[index % dbConLen]))
-    )
+  return Promise.map(examData, (record, index) => {
+    return Exam.create(record)
+      .then(exam => exam.setProfessor(professors[index % profLen]))
+      .then(exam => exam.setDb_connection(dbConnections[index % dbConLen]))
   })
-
-  return Promise.all(result)
 }
 
 function initializeModel(Model, records) {
-  const result = []
-  records.forEach(record => result.push(Model.create(record)))
-  return Promise.all(result)
+  return Promise.map(records, record => Model.create(record))
 }
 
 function populateDatabase(db) {
@@ -102,10 +89,10 @@ function populateDatabase(db) {
     let professors = users.filter(record => record.role === 'PROFESSOR')
     let students = users.filter(record => record.role === 'STUDENT')
     return insertExams(Exam, professors, dbConnections)
-      .then(exams => { return { students, exams, dbConnections } })
+      .then(exams => { return { students, exams } })
   })
     .then(result => {
-      return insertQuestions(Question, result.exams, result.dbConnections)
+      return insertQuestions(Question, result.exams)
         .then(() => pick(result, ['students', 'exams']))
     })
     .then(result => insertTakenExams(ExamTaken, result.exams, result.students))
