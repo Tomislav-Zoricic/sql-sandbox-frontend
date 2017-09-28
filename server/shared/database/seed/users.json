@@ -1,0 +1,15 @@
+{
+  "data": [{
+    "firstName": "Ivan",
+    "lastName": "Ivanovic",
+    "email": "ivan@gmail.com",
+    "password": "ivan12",
+    "role": "PROFESSOR"
+  }, {
+    "firstName": "Ante",
+    "lastName": "Antic",
+    "email": "ante@gmail.com",
+    "password": "ante12",
+    "role": "STUDENT"
+  }]
+}

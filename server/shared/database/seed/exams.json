@@ -1,0 +1,17 @@
+{
+  "data": [{
+    "name": "First semester exam",
+    "academicYear": "2017",
+    "duration": 60,
+    "easyPoints": 1,
+    "mediumPoints": 2,
+    "hardPoints": 3
+  }, {
+    "name": "Second semester exam",
+    "academicYear": "2018",
+    "duration": 60,
+    "easyPoints": 1,
+    "mediumPoints": 2,
+    "hardPoints": 3
+  }]
+}
