@@ -29,7 +29,7 @@ forEach(models, model => {
 const db = Object.assign({
   Sequelize,
   sequelize,
-  initialize() { return sequelize.sync({ force: true }) }
+  initialize() { return sequelize.sync() }
 }, models)
 
 module.exports = db
